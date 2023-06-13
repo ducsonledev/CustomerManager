@@ -1,8 +1,8 @@
 package com.demospringfullstack.springbootexample.customer;
 
 
+import com.github.javafaker.IdNumber;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -33,7 +33,7 @@ public class Customer {
     )
     private Integer age;
 
-    public Customer() {
+    public Customer(IdNumber idNumber, String name, String email, int age) {
     }
 
     public Customer(String name, String email, Integer age) {
