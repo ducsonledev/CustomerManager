@@ -33,7 +33,7 @@ public class Customer {
     )
     private Integer age;
 
-    public Customer(IdNumber idNumber, String name, String email, int age) {
+    public Customer() {
     }
 
     public Customer(String name, String email, Integer age) {
