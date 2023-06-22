@@ -15,10 +15,11 @@ import java.util.Random;
 public class SpringBootExampleApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(SpringBootExampleApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner runner(CustomerRepository customerRepository) {
 		return args -> {
 			var faker = new Faker();
@@ -34,5 +35,5 @@ public class SpringBootExampleApplication {
 			);
 			customerRepository.save(customer);
 		};
-	}
+	}*/
 }

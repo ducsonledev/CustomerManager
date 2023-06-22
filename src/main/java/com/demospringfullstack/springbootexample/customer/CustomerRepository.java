@@ -1,7 +1,9 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+@Transactional
 public interface CustomerRepository
         extends JpaRepository<Customer, Integer> {
 

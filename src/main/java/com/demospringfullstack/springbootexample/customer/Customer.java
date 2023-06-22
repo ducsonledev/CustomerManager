@@ -3,11 +3,27 @@ package com.demospringfullstack.springbootexample.customer;
 
 import com.github.javafaker.IdNumber;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-// @AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+/*@Table(
+    name = "customer",
+    uniqueConstraints = {
+            @UniqueConstraint(
+                    name = "customer_email_unique",
+                    columnNames = "email"
+            ),
+            @UniqueConstraint(
+                    name = "profile_image_id_unique",
+                    columnNames = "profileImageId"
+            )
+    }
+)*/
 public class Customer {
 
     @Id
@@ -25,7 +41,8 @@ public class Customer {
     )
     private String name;
     @Column(
-            nullable = false
+            nullable = false,
+            unique = true
     )
     private String email;
     @Column(
@@ -33,17 +50,7 @@ public class Customer {
     )
     private Integer age;
 
-    public Customer() {
-    }
-
     public Customer(String name, String email, Integer age) {
-        this.name = name;
-        this.email = email;
-        this.age = age;
-    }
-
-    public Customer(Integer id, String name, String email, Integer age) {
-        this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
