@@ -1,7 +1,5 @@
 package com.demospringfullstack.springbootexample.customer;
 
-
-import com.github.javafaker.IdNumber;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,29 +9,26 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-/*@Table(
+@Table(
     name = "customer",
     uniqueConstraints = {
             @UniqueConstraint(
                     name = "customer_email_unique",
                     columnNames = "email"
-            ),
-            @UniqueConstraint(
-                    name = "profile_image_id_unique",
-                    columnNames = "profileImageId"
             )
     }
-)*/
+)
 public class Customer {
 
     @Id
     @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "customer_id_sequence"
+            name = "customer_id_seq",
+            sequenceName = "customer_id_seq",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_sequence"
+            generator = "customer_id_seq"
     )
     private Integer id;
     @Column(
@@ -41,8 +36,7 @@ public class Customer {
     )
     private String name;
     @Column(
-            nullable = false,
-            unique = true
+            nullable = false
     )
     private String email;
     @Column(
