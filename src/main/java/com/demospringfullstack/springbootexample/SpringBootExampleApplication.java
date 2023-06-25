@@ -19,15 +19,15 @@ public class SpringBootExampleApplication {
 		SpringApplication.run(SpringBootExampleApplication.class, args);
 	}
 
-	/*@Bean
+	@Bean
 	CommandLineRunner runner(CustomerRepository customerRepository) {
 		return args -> {
 			var faker = new Faker();
-			Random random = new Random();
+			var random = new Random();
 			var name = faker.name();
 			String firstName = name.firstName();
 			String lastName = name.lastName();
-			Customer customer = new Customer(
+			var customer = new Customer(
 					firstName + " " + lastName,
 					firstName.toLowerCase() + "." + lastName.toLowerCase()
 							+ "@mailservice.com",
@@ -35,5 +35,5 @@ public class SpringBootExampleApplication {
 			);
 			customerRepository.save(customer);
 		};
-	}*/
+	}
 }
