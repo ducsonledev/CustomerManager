@@ -13,7 +13,18 @@ services:
     networks:
       - db
     restart: unless-stopped
-
+  sonscode-api:
+    container_name: sonscode-api
+    image: ozon1/sonscode-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/customer
+    ports:
+      - "8088:8080"
+    networks:
+      - db
+    depends_on:
+      - db
+    restart: unless-stopped
 networks:
   db:
     driver: bridge
