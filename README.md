@@ -20,4 +20,4 @@ bash tree TODO
 
 ## Prerequisites
 
-See pom.xml
+See `pom.xml`
