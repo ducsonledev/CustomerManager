@@ -8,8 +8,8 @@ Manage customer authentification and incorparating all building blocks to manage
 
 ### Work in Progress
 
-    frontend with typescript/ReactJS
-    deployment with terraform and AWS ECS
+- [] frontend with typescript/ReactJS
+- [] deployment with terraform and AWS ECS
 
 ### Repository Structure
 
