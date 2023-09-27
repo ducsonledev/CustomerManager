@@ -1,7 +1,12 @@
-
+import UserProfile from "./UserProfile.jsx";
 
 function App() {
-    return <h1>Hello React</h1>
+    const name = "John";
+    return <div>
+                <UserProfile/>
+                <p>test {name} </p>
+                <h1>hello {name}</h1>
+           </div>
 }
 
-export default App
+export default App;
