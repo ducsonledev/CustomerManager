@@ -1,6 +1,6 @@
 import UserProfile from "./UserProfile.jsx";
 
-const user = [
+const users = [
     {
         name: "Jamila",
         age: 22,
@@ -23,25 +23,22 @@ const user = [
     }
 ]
 
+const UserProfiles = ({users}) => (
+    <div>
+        {users.map((user, index) => (
+              <UserProfile
+                  name={user.name}
+                  age={user.age}
+                  gender={user.gender}
+                  imageNumber={index}
+              />
+          ))}
+   </div>
+)
 
 function App() {
-    const name = "John";
-    return <div>
-                <UserProfile
-                    name={"John"}
-                    age={22}
-                    gender={"men"}>
-                    <p>Hello</p>
-                </UserProfile>
-                <UserProfile
-                    name={"Maria"}
-                    age={23}
-                    gender={"women"}>
-                    <h1>Ciao</h1>
-                </UserProfile>
-                <p>test {name} </p>
-                <h1>hello {name}</h1>
-           </div>
+    return (
+        <UserProfiles users={users}/>
+    )
 }
-
 export default App;
