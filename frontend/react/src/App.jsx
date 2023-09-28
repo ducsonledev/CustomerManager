@@ -47,6 +47,9 @@ function App() {
         setTimeout(() => {
             setIsLoading(false)
         }, 4000)
+        return () => {
+            console.log("cleanup functions") // when component unmounted
+        }
     }, [])
 
     if(isLoading) {
