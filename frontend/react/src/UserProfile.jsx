@@ -1,6 +1,8 @@
-const UserProfile = () => {
+const UserProfile = ({name, age, gender}) => {
     return <div>
-                <img src={"https://randomuser.me/api/portraits/men/75.jpg"} />
+                <h1>{name}</h1>
+                <p>{age}</p>
+                <img src={`https://randomuser.me/api/portraits/${gender}/75.jpg`} />
                 <p>UserProfile</p>
            </div>
 }
