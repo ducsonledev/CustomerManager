@@ -1,5 +1,5 @@
 import UserProfile from "./UserProfile.jsx";
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 const users = [
     {
@@ -40,6 +40,18 @@ const UserProfiles = ({users}) => (
 function App() {
 
     const [counter, setCounter] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 4000)
+    }, [])
+
+    if(isLoading) {
+        return "loading...";
+    }
 
     return (
         <div>
