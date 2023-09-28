@@ -1,4 +1,5 @@
 import UserProfile from "./UserProfile.jsx";
+import {useState} from 'react'
 
 const users = [
     {
@@ -37,8 +38,17 @@ const UserProfiles = ({users}) => (
 )
 
 function App() {
+
+    const [counter, setCounter] = useState(0);
+
     return (
-        <UserProfiles users={users}/>
+        <div>
+            <button onClick={() => setCounter(prevCounter => prevCounter + 1)}>
+                Increment Counter
+            </button>
+            <h1>{counter}</h1>
+            <UserProfiles users={users}/>
+        </div>
     )
 }
 export default App;
