@@ -10,14 +10,16 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true);
-        getCustomers().then(res => {
-            setCustomers(res.data)
-        }).catch(err => {
-            console.log(err)
-        }).finally(() => {
-            setLoading(false)
-        }
-    )},[])
+        setTimeout(() => {
+            getCustomers().then(res => {
+                setCustomers(res.data)
+            }).catch(err => {
+                console.log(err)
+            }).finally(() => {
+                setLoading(false)
+            })
+        }, 3000)
+    },[])
 
     if (loading) {
         return (
