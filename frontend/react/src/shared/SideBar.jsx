@@ -21,6 +21,7 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  Image
 } from '@chakra-ui/react'
 import {
   FiHome,
@@ -71,10 +72,16 @@ const SidebarContent = ({ onClose, ...rest }) => { //: SidebarProps
       pos="fixed"
       h="full"
       {...rest}>
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+      <Flex h="20" flexDirection="column" alignItems="center" mx="8" mb={70} mt={5} justifyContent="space-between">
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold" mb={5}>
+          Dashboard
         </Text>
+        <Image
+          borderRadius='full'
+          boxSize='75px'
+          src='https://bit.ly/dan-abramov'
+          alt='Dan Abramov'
+        />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
