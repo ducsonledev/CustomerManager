@@ -1,69 +1,12 @@
-import UserProfile from "./UserProfile.jsx";
-import {useState, useEffect} from 'react'
+import { Button } from '@chakra-ui/react';
+import SideBarWithHeader from "./shared/SideBar.jsx";
 
-const users = [
-    {
-        name: "Jamila",
-        age: 22,
-        gender: "FEMALE"
-    },
-    {
-        name: "Anne",
-        age: 41,
-        gender: "FEMALE"
-    },
-    {
-        name: "Rex",
-        age: 22,
-        gender: "MALE"
-    },
-    {
-        name: "Moos",
-        age: 22,
-        gender: "IT"
-    }
-]
-
-const UserProfiles = ({users}) => (
-    <div>
-        {users.map((user, index) => (
-              <UserProfile
-                  name={user.name}
-                  age={user.age}
-                  gender={user.gender}
-                  imageNumber={index}
-              />
-          ))}
-   </div>
-)
-
-function App() {
-
-    const [counter, setCounter] = useState(0);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        setIsLoading(true)
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 4000)
-        return () => {
-            console.log("cleanup functions") // when component unmounted
-        }
-    }, [])
-
-    if(isLoading) {
-        return "loading...";
-    }
-
+const App = () => {
     return (
-        <div>
-            <button onClick={() => setCounter(prevCounter => prevCounter + 1)}>
-                Increment Counter
-            </button>
-            <h1>{counter}</h1>
-            <UserProfiles users={users}/>
-        </div>
+        <SideBarWithHeader>
+            <Button colorScheme='teal' variant='outline'>Click me</Button>
+        </SideBarWithHeader>
     )
 }
+
 export default App;
