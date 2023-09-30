@@ -39,7 +39,8 @@ public class CustomerService {
                 new Customer(
                         customerRegistrationRequest.name(),
                         customerRegistrationRequest.email(),
-                        customerRegistrationRequest.age()
+                        customerRegistrationRequest.age(),
+                        customerRegistrationRequest.gender()
                 )
         );
     }

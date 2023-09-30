@@ -2,6 +2,7 @@ package com.demospringfullstack.springbootexample;
 
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRepository;
+import com.demospringfullstack.springbootexample.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,11 +28,13 @@ public class SpringBootExampleApplication {
 			var name = faker.name();
 			String firstName = name.firstName();
 			String lastName = name.lastName();
+			var gender = (random.nextInt(0, 2) == 0) ? Gender.MALE : Gender.FEMALE;
 			var customer = new Customer(
 					firstName + " " + lastName,
 					firstName.toLowerCase() + "." + lastName.toLowerCase()
 							+ "@mailservice.com",
-					random.nextInt(16, 99)
+					random.nextInt(16, 99),
+					gender
 			);
 			customerRepository.save(customer);
 		};
