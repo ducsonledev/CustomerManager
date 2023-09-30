@@ -121,6 +121,9 @@ We present the repository structure as well as the functionality of the differen
 
 
 ```
+### Data
+
+Random User Image: https://randomuser.me/
 
 ### Prerequisites
 
