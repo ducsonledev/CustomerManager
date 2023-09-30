@@ -14,6 +14,9 @@ import {
 } from '@chakra-ui/react'
 
 export default function SocialProfileWithImage({id, name, email, age, gender}) {
+
+  gender = gender === "MALE" ? "men" : "women"
+
   return (
     <Center py={6}>
       <Box
@@ -36,7 +39,7 @@ export default function SocialProfileWithImage({id, name, email, age, gender}) {
           <Avatar
             size={'xl'}
             src={
-              `https://randomuser.me/api/portraits/men/${id}.jpg`
+              `https://randomuser.me/api/portraits/${gender}/${id}.jpg`
             }
             css={{
               border: '2px solid white',
