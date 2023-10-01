@@ -5,7 +5,8 @@ Using Spring Boot 3, adding more and more features over time, like docker, postg
 ### CustomerManager
 
 Manage customer authentification and incorparating all building blocks to manage our customers.
-![Screenshot 2023-09-30-204737-ui-customers-managing](https://github.com/ducsonledev/CustomerManager/assets/72577766/71f26e6e-14ac-4f2c-9ea0-d6466d29123e)
+
+![Screenshot 2023-09-30-204737-ui-customers-managing-2](https://github.com/ducsonledev/CustomerManager/assets/72577766/b455f01b-4392-4f8a-95a0-464744fdad0d)
 
 
 ### Work in Progress
