@@ -3,6 +3,7 @@ package com.demospringfullstack.springbootexample.journey;
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRegistrationRequest;
 import com.demospringfullstack.springbootexample.customer.CustomerUpdateRequest;
+import com.demospringfullstack.springbootexample.customer.Gender;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
@@ -35,12 +36,14 @@ public class CustomerIT {
         // create registration request
         Faker faker = new Faker();
         Name fakerName = faker.name();
+        Random random = new Random();
+        var gender = (random.nextInt(0, 2) == 0) ? Gender.MALE : Gender.FEMALE;
         String name = fakerName.fullName();
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
         var request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -68,7 +71,7 @@ public class CustomerIT {
 
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, email, age
+                name, email, age, gender
         );
 
         assertThat(allCustomers)
@@ -100,12 +103,14 @@ public class CustomerIT {
         // create registration request
         Faker faker = new Faker();
         Name fakerName = faker.name();
+        Random random = new Random();
+        var gender = (random.nextInt(0, 2) == 0) ? Gender.MALE : Gender.FEMALE;
         String name = fakerName.fullName();
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
         var request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -158,12 +163,14 @@ public class CustomerIT {
         // create registration request
         Faker faker = new Faker();
         Name fakerName = faker.name();
+        Random random = new Random();
+        var gender = (random.nextInt(0, 2) == 0) ? Gender.MALE : Gender.FEMALE;
         String name = fakerName.fullName();
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
         var request = new CustomerRegistrationRequest(
-                name, email, age
+                name, email, age, gender
         );
 
         // send a post request
@@ -222,7 +229,7 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                id, updatedName, email, age
+                id, updatedName, email, age, gender
         );
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);
