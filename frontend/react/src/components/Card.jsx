@@ -13,9 +13,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-export default function SocialProfileWithImage({id, name, email, age, gender}) {
+export default function SocialProfileWithImage({id, name, email, age, gender, imageNumber}) {
 
-  gender = gender === "MALE" ? "men" : "women"
+  const genderImage = gender === "MALE" ? "men" : "women"
 
   return (
     <Center py={6}>
@@ -39,7 +39,7 @@ export default function SocialProfileWithImage({id, name, email, age, gender}) {
           <Avatar
             size={'xl'}
             src={
-              `https://randomuser.me/api/portraits/${gender}/${id}.jpg`
+              `https://randomuser.me/api/portraits/${genderImage}/${imageNumber}.jpg`
             }
             css={{
               border: '2px solid white',
@@ -54,7 +54,7 @@ export default function SocialProfileWithImage({id, name, email, age, gender}) {
               {name}
             </Heading>
             <Text color={'gray.500'}>{email}</Text>
-            <Text color={'gray.500'}>Age {age} | Gender {gender}</Text>
+            <Text color={'gray.500'}>Age {age} | {gender}</Text>
           </Stack>
 
         </Box>
