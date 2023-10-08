@@ -7,6 +7,7 @@ import SideBarWithHeader from "./components/shared/SideBar.jsx";
 import SocialProfileWithImage from "./components/Card.jsx"
 import {useEffect, useState} from 'react';
 import {getCustomers} from "./services/client.js";
+import DrawerForm from "./components/DrawerForm.jsx"
 
 const App = () => {
 
@@ -50,6 +51,7 @@ const App = () => {
 
     return (
         <SideBarWithHeader>
+            <DrawerForm />
             <Wrap justify='center' spacing='30px'>
                 {customers.map((customer, index) => (
                     <WrapItem key={index}>
