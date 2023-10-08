@@ -6,6 +6,7 @@ import { Box,
          Alert,
          AlertIcon,
          Select,
+         Stack,
          FormLabel
 } from '@chakra-ui/react'
 import { Formik,
@@ -24,7 +25,7 @@ const MyTextInput = ({ label, ...props }) => {
       <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
       <Input className="text-input" {...field} {...props} />
       {meta.touched && meta.error ? (
-        <Alert className="error">
+        <Alert className="error" status={"error"} mt={2}>
             <AlertIcon/>
             {meta.error}
         </Alert>
@@ -40,7 +41,7 @@ const MySelect = ({ label, ...props }) => {
       <FormLabel htmlFor={props.id || props.name}>{label}</FormLabel>
       <Select {...field} {...props} />
       {meta.touched && meta.error ? (
-        <Alert className="error">
+        <Alert className="error" status={"error"} mt={2}>
             <AlertIcon/>
             {meta.error}
         </Alert>
@@ -68,13 +69,13 @@ const CreateCustomerForm = () => {
             .email('Invalid email address')
             .required('Required'),
           age: Yup.number()
-            .min(1, 'Must be at least 16 years of age')
+            .min(16, 'Must be at least 16 years of age')
             .max(100, 'Must be less than 100 years of age')
             .required('Required'),
           gender: Yup.string()
             .oneOf(
               ['MALE', 'FEMALE'],
-              'Invalid Gender Type'
+              'Invalid Gender'
             )
             .required('Required'),
         })}
@@ -85,36 +86,40 @@ const CreateCustomerForm = () => {
           }, 400);
         }}
       >
-        <Form>
-          <MyTextInput
-            label="Name"
-            name="name"
-            type="text"
-            placeholder="Jane"
-          />
+        {({isValid, isSubmitting}) => (
+            <Form>
+                <Stack spacing={"24px"}>
+                  <MyTextInput
+                    label="Name"
+                    name="name"
+                    type="text"
+                    placeholder="Jane"
+                  />
 
-          <MyTextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="jane@formik.com"
-          />
+                  <MyTextInput
+                    label="Email Address"
+                    name="email"
+                    type="email"
+                    placeholder="jane@formik.com"
+                  />
 
-          <MyTextInput
-            label="Age"
-            name="age"
-            type="number"
-            placeholder="20"
-          />
+                  <MyTextInput
+                    label="Age"
+                    name="age"
+                    type="number"
+                    placeholder="20"
+                  />
 
-          <MySelect label="Gender" name="gender">
-            <option value="">Select a gender</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-          </MySelect>
+                  <MySelect label="Gender" name="gender">
+                    <option value="">Select a gender</option>
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                  </MySelect>
 
-          <Button type="submit">Submit</Button>
-        </Form>
+                  <Button disabled={!isValid || isSubmitting} type="submit">Submit</Button>
+               </Stack>
+            </Form>
+        )}
       </Formik>
     </>
   );
