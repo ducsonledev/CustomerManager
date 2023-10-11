@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Box,
          Button,
          Input,
@@ -86,7 +85,11 @@ const CreateCustomerForm = () => {
           }, 400);
         }}
       >
-        {({isValid, isSubmitting}) => (
+        {({isValid, dirty, isSubmitting}) => {
+        console.log(isValid, dirty, isSubmitting);
+        console.log(!isValid || !dirty || isSubmitting);
+        //debugger
+        return (
             <Form>
                 <Stack spacing={"24px"}>
                   <MyTextInput
@@ -116,10 +119,10 @@ const CreateCustomerForm = () => {
                     <option value="FEMALE">Female</option>
                   </MySelect>
 
-                  <Button disabled={!isValid || isSubmitting} type="submit">Submit</Button>
+                  <Button isDisabled={!isValid || !dirty || isSubmitting} type="submit">Submit</Button>
                </Stack>
             </Form>
-        )}
+        )}}
       </Formik>
     </>
   );
