@@ -51,7 +51,7 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-const CreateCustomerForm = () => {
+const CreateCustomerForm = ({fetchCustomers}) => {
   return (
     <>
       <Formik
@@ -85,6 +85,7 @@ const CreateCustomerForm = () => {
             .then(res => {
               console.log(res)
               alert("customer saved")
+              fetchCustomers()
             }).catch(err => {
               console.log(err)
             }).finally(() => {
