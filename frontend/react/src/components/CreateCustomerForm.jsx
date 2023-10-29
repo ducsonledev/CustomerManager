@@ -14,6 +14,7 @@ import { Formik,
 } from 'formik';
 import * as Yup from 'yup';
 import { saveCustomer } from '../services/client';
+import { errorNotification, successNotification } from '../services/notification';
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -84,10 +85,17 @@ const CreateCustomerForm = ({fetchCustomers}) => {
           saveCustomer(customer)
             .then(res => {
               console.log(res)
-              alert("customer saved")
+              successNotification(
+                "Customer saved",
+                `${customer.name} was successfully saved`
+              )
               fetchCustomers()
             }).catch(err => {
               console.log(err)
+              errorNotification(
+                err.code,
+                err.response.data.message
+              )
             }).finally(() => {
               setSubmitting(false)
             })

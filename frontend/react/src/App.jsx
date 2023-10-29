@@ -5,21 +5,27 @@ import { Wrap,
 } from '@chakra-ui/react';
 import SideBarWithHeader from "./components/shared/SideBar.jsx";
 import SocialProfileWithImage from "./components/Card.jsx"
-import {useEffect, useState} from 'react';
-import {getCustomers} from "./services/client.js";
+import { useEffect, useState } from 'react';
+import { getCustomers } from "./services/client.js";
 import DrawerForm from "./components/DrawerForm.jsx"
+import { errorNotification } from "./services/notification.js"
 
 const App = () => {
 
     const [customers, setCustomers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [err, setError] = useState("")
 
     const fetchCustomers = () => {
         setLoading(true);
         getCustomers().then(res => {
             setCustomers(res.data)
         }).catch(err => {
-            console.log(err)
+            setError(err.response.data.message)
+            errorNotification(
+                err.code,
+                err.response.data.message
+            )
         }).finally(() => {
             setLoading(false)
         })
@@ -39,6 +45,17 @@ const App = () => {
                   color='blue.500'
                   size='xl'
                   />
+            </SideBarWithHeader>
+        )
+    }
+
+    if(err) {
+        return (
+            <SideBarWithHeader>
+                 <DrawerForm 
+                    fetchCustomers={fetchCustomers}
+                 />
+                <Text mt={5}>Oops, there was an error!</Text>
             </SideBarWithHeader>
         )
     }
