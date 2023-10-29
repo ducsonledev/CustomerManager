@@ -13,6 +13,7 @@ import { Formik,
          useField
 } from 'formik';
 import * as Yup from 'yup';
+import { saveCustomer } from '../services/client';
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -78,16 +79,22 @@ const CreateCustomerForm = () => {
             )
             .required('Required'),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={(customer, { setSubmitting }) => {
+          setSubmitting(true)
+          saveCustomer(customer)
+            .then(res => {
+              console.log(res)
+              alert("customer saved")
+            }).catch(err => {
+              console.log(err)
+            }).finally(() => {
+              setSubmitting(false)
+            })
         }}
       >
         {({isValid, dirty, isSubmitting}) => {
-        console.log(isValid, dirty, isSubmitting);
-        console.log(!isValid || !dirty || isSubmitting);
+//         console.log(isValid, dirty, isSubmitting);
+//         console.log(!isValid || !dirty || isSubmitting);
         //debugger
         return (
             <Form>

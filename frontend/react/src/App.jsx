@@ -16,15 +16,13 @@ const App = () => {
 
     useEffect(() => {
         setLoading(true);
-        setTimeout(() => {
-            getCustomers().then(res => {
-                setCustomers(res.data)
-            }).catch(err => {
-                console.log(err)
-            }).finally(() => {
-                setLoading(false)
-            })
-        }, 3000)
+        getCustomers().then(res => {
+            setCustomers(res.data)
+        }).catch(err => {
+            console.log(err)
+        }).finally(() => {
+            setLoading(false)
+        })
     },[])
 
     if (loading) {
@@ -36,7 +34,7 @@ const App = () => {
                   emptyColor='gray.200'
                   color='blue.500'
                   size='xl'
-                />
+                  />
             </SideBarWithHeader>
         )
     }
@@ -44,7 +42,8 @@ const App = () => {
     if(customers.length <= 0) {
         return (
             <SideBarWithHeader>
-                <Text>No customers available!</Text>
+                 <DrawerForm />
+                <Text mt={5}>No customers available!</Text>
             </SideBarWithHeader>
         )
     }
