@@ -6,7 +6,7 @@ import { Wrap,
 import SideBarWithHeader from "./components/shared/SideBar.jsx";
 import SocialProfileWithImage from "./components/Card.jsx"
 import { useEffect, useState } from 'react';
-import { getCustomers } from "./services/client.js";
+import { deleteCustomer, getCustomers } from "./services/client.js";
 import DrawerForm from "./components/DrawerForm.jsx"
 import { errorNotification } from "./services/notification.js"
 
@@ -31,14 +31,14 @@ const App = () => {
         })
     }
 
+    const handleDeleteCustomer = (id) => {
+        deleteCustomer(id)
+    }
+
     useEffect(() => {
         fetchCustomers();
     }, [])
 
-    const handleDeleteCustomer = (id) => {
-        console.log("Delete ", id)
-        console.log(customers.filter((customer) => customer.id === id))
-    }
 
     if (loading) {
         return (
