@@ -11,7 +11,7 @@ import {
   } from '@chakra-ui/react'
 import React from 'react'
 import { deleteCustomer } from '../services/client'
-import { errorNotification, deleteNotification, successNotification } from '../services/notification';
+import { errorNotification, successNotification } from '../services/notification';
 
 function DeleteCustomerButton({id, name, fetchCustomers}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -19,7 +19,7 @@ function DeleteCustomerButton({id, name, fetchCustomers}) {
     const onDelete = () => {
         deleteCustomer(id).then(res => {
           console.log(res)
-          deleteNotification(
+          successNotification(
             "Customer deleted",
             `${name} was successfully deleted`
           )
