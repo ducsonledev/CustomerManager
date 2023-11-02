@@ -35,8 +35,9 @@ const App = () => {
         fetchCustomers();
     }, [])
 
-    const handleDeleteCustomer = () => {
-        console.log("Delete")
+    const handleDeleteCustomer = (id) => {
+        console.log("Delete ", id)
+        console.log(customers.filter((customer) => customer.id === id))
     }
 
     if (loading) {
@@ -84,7 +85,7 @@ const App = () => {
                         <SocialProfileWithImage 
                             {...customer} 
                             imageNumber={index}
-                            handleDeleteCustomer={handleDeleteCustomer}
+                            handleDeleteCustomer={() => {handleDeleteCustomer(customer.id)}}
                         />
                     </WrapItem>
                 ))}
