@@ -27,3 +27,11 @@ export const errorNotification = (title, description) => {
         "error"
     )
 }
+
+export const deleteNotification = (title, description) => {
+    notification(
+        title,
+        description,
+        "delete"
+    )
+}

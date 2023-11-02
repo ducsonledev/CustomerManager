@@ -21,7 +21,7 @@ export default function SocialProfileWithImage({
   age,
   gender,
   imageNumber,
-  handleDeleteCustomer,
+  fetchCustomers
 }) {
   const genderImage = gender === "MALE" ? "men" : "women";
 
@@ -65,7 +65,9 @@ export default function SocialProfileWithImage({
               Age {age} | {gender}
             </Text>
             <DeleteCustomerButton
-              handleDeleteCustomer={handleDeleteCustomer}
+              id={id}
+              name={name}
+              fetchCustomers={fetchCustomers}
               mt={2}
             ></DeleteCustomerButton>
           </Stack>

@@ -31,10 +31,6 @@ const App = () => {
         })
     }
 
-    const handleDeleteCustomer = (id) => {
-        deleteCustomer(id)
-    }
-
     useEffect(() => {
         fetchCustomers();
     }, [])
@@ -85,7 +81,7 @@ const App = () => {
                         <SocialProfileWithImage 
                             {...customer} 
                             imageNumber={index}
-                            handleDeleteCustomer={() => {handleDeleteCustomer(customer.id)}}
+                            fetchCustomers={fetchCustomers}
                         />
                     </WrapItem>
                 ))}

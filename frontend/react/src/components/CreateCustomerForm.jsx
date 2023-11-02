@@ -93,7 +93,7 @@ const CreateCustomerForm = ({fetchCustomers}) => {
             }).catch(err => {
               console.log(err)
               errorNotification(
-                err.code,
+                err.Code,
                 err.response.data.message
               )
             }).finally(() => {
