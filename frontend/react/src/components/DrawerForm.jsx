@@ -20,14 +20,14 @@ const DrawerForm = ({fetchCustomers}) => {
 
     return (
         <>
-        <Button
-            leftIcon={<AddIcon/>}
-            colorScheme={"teal"}
-            onClick={onOpen}
-        >
-            Create Customer
-        </Button>
-        <Drawer isOpen={isOpen} onClose={onClose} size={'xl'}>
+          <Button
+              leftIcon={<AddIcon/>}
+              colorScheme={"teal"}
+              onClick={onOpen}
+          >
+              Create Customer
+          </Button>
+          <Drawer isOpen={isOpen} onClose={onClose} size={'xl'}>
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />

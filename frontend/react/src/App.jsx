@@ -35,6 +35,10 @@ const App = () => {
         fetchCustomers();
     }, [])
 
+    const handleDeleteCustomer = () => {
+        console.log("Delete")
+    }
+
     if (loading) {
         return (
             <SideBarWithHeader>
@@ -44,7 +48,7 @@ const App = () => {
                   emptyColor='gray.200'
                   color='blue.500'
                   size='xl'
-                  />
+                />
             </SideBarWithHeader>
         )
     }
@@ -77,7 +81,11 @@ const App = () => {
             <Wrap justify='center' spacing='30px'>
                 {customers.map((customer, index) => (
                     <WrapItem key={index}>
-                        <SocialProfileWithImage {...customer} imageNumber={index}/>
+                        <SocialProfileWithImage 
+                            {...customer} 
+                            imageNumber={index}
+                            handleDeleteCustomer={handleDeleteCustomer}
+                        />
                     </WrapItem>
                 ))}
             </Wrap>
