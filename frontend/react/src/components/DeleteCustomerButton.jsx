@@ -19,7 +19,7 @@ function DeleteCustomerButton({id, name, fetchCustomers}) {
     const onDelete = () => {
         deleteCustomer(id).then(res => {
           console.log(res)
-          successNotification(
+          deleteNotification(
             "Customer deleted",
             `${name} was successfully deleted`
           )

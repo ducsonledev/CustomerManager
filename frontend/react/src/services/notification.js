@@ -32,6 +32,6 @@ export const deleteNotification = (title, description) => {
     notification(
         title,
         description,
-        "delete"
+        "success"
     )
 }
