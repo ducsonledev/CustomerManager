@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import DeleteCustomerButton from './DeleteCustomerButton.jsx'
+import DrawerEditForm from './DrawerEditForm.jsx';
 
 export default function SocialProfileWithImage({
   id,
@@ -67,13 +68,21 @@ export default function SocialProfileWithImage({
           </Stack>
         </Box>
         <Stack mx={5} mb={5}>
+          <DrawerEditForm
+            id={id}
+            name={name}
+            email={email}
+            age={age}
+            gender={gender}
+            fetchCustomers={fetchCustomers}
+          ></DrawerEditForm>
           <DeleteCustomerButton
             id={id}
             name={name}
             fetchCustomers={fetchCustomers}
           ></DeleteCustomerButton>
         </Stack>
-        
+
       </Box>
     </Center>
   );

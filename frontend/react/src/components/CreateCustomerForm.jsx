@@ -102,9 +102,6 @@ const CreateCustomerForm = ({fetchCustomers}) => {
         }}
       >
         {({isValid, dirty, isSubmitting}) => {
-//         console.log(isValid, dirty, isSubmitting);
-//         console.log(!isValid || !dirty || isSubmitting);
-        //debugger
         return (
             <Form>
                 <Stack spacing={"24px"}>

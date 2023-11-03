@@ -48,7 +48,7 @@ function DeleteCustomerButton({id, name, fetchCustomers}) {
           <AlertDialogOverlay>
             <AlertDialogContent>
               <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-                Delete Customer
+                Delete '{name}'
               </AlertDialogHeader>
   
               <AlertDialogBody>
