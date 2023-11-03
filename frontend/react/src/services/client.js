@@ -23,7 +23,6 @@ export const deleteCustomer = async (id) => {
     try {
         return await axios.delete(
             `${import.meta.env.VITE_API_BASE_URL}/api/v1/customers/${id}`,
-            id
         )
     } catch (error) {
         throw error

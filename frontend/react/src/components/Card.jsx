@@ -64,14 +64,16 @@ export default function SocialProfileWithImage({
             <Text color={"gray.500"}>
               Age {age} | {gender}
             </Text>
-            <DeleteCustomerButton
-              id={id}
-              name={name}
-              fetchCustomers={fetchCustomers}
-              mt={2}
-            ></DeleteCustomerButton>
           </Stack>
         </Box>
+        <Stack mx={5} mb={5}>
+          <DeleteCustomerButton
+            id={id}
+            name={name}
+            fetchCustomers={fetchCustomers}
+          ></DeleteCustomerButton>
+        </Stack>
+        
       </Box>
     </Center>
   );

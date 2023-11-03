@@ -36,7 +36,7 @@ function DeleteCustomerButton({id, name, fetchCustomers}) {
     }
     return (
       <>
-        <Button colorScheme='red' onClick={onOpen}>
+        <Button colorScheme='red' borderRadius='3xl' onClick={onOpen}>
           Delete Customer
         </Button>
   
@@ -52,7 +52,7 @@ function DeleteCustomerButton({id, name, fetchCustomers}) {
               </AlertDialogHeader>
   
               <AlertDialogBody>
-                Are you sure? You can't undo this action afterwards.
+                Are you sure you want to delete {name}? You can't undo this action afterwards.
               </AlertDialogBody>
   
               <AlertDialogFooter>
