@@ -7,7 +7,7 @@ import SideBarWithHeader from "./components/shared/SideBar.jsx";
 import SocialProfileWithImage from "./components/Card.jsx"
 import { useEffect, useState } from 'react';
 import { deleteCustomer, getCustomers } from "./services/client.js";
-import DrawerForm from "./components/DrawerForm.jsx"
+import DrawerForm from "./components/CreateCustomerDrawer.jsx"
 import { errorNotification } from "./services/notification.js"
 
 const App = () => {

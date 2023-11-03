@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import DeleteCustomerButton from './DeleteCustomerButton.jsx'
-import DrawerEditForm from './DrawerEditForm.jsx';
+import DrawerEditForm from './UpdateCustomerDrawer.jsx';
 
 export default function SocialProfileWithImage({
   id,
