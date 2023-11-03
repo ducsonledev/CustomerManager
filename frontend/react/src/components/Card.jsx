@@ -67,7 +67,7 @@ export default function SocialProfileWithImage({
             </Text>
           </Stack>
         </Box>
-        <Stack mx={5} mb={5}>
+        <Stack direction={'row'} mx={5} mb={5}>
           <DrawerEditForm
             id={id}
             name={name}
