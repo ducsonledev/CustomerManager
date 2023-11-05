@@ -3,20 +3,17 @@ package com.demospringfullstack.springbootexample.customer;
 import com.demospringfullstack.springbootexample.exception.DuplicateResourceException;
 import com.demospringfullstack.springbootexample.exception.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.ResourceNotFoundException;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +41,7 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -61,7 +58,7 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.empty());
@@ -158,7 +155,7 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -187,7 +184,7 @@ class CustomerServiceTest {
                 "John Bolt", null, null
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -216,7 +213,7 @@ class CustomerServiceTest {
                 null, newEmail, null
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -245,7 +242,7 @@ class CustomerServiceTest {
                 null, null, 33
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -295,10 +292,10 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
         Customer johnny = new Customer(
-                1, "Johnny", "johnny@mailservice.com", 21, Gender.MALE
+                1, "Johnny", Gender.MALE, "johnny@mailservice.com", 21
         );
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
         when(customerDAO.existsPersonWithEmail(newEmail)).thenReturn(true);
@@ -317,7 +314,7 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", 22, Gender.MALE
+                id, "John", Gender.MALE, "john@mailservice.com", 22
         );
         var request = new CustomerUpdateRequest(
                 customer.getName(), customer.getEmail(), customer.getAge()

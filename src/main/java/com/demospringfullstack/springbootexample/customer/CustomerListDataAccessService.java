@@ -1,7 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +15,11 @@ public class CustomerListDataAccessService implements CustomerDAO {
     static {
         customers = new ArrayList<>();
         Customer alex = new Customer(
-                1, "Alex", "test@mail.com", 21, Gender.MALE
+                1, "Alex", Gender.MALE, "test@mail.com", 21
         );
         customers.add(alex);
         Customer jamila = new Customer(
-                2, "Jamila", "test@mail.com", 33, Gender.FEMALE
+                2, "Jamila", Gender.FEMALE, "test@mail.com", 33
         );
         customers.add(jamila);
     }

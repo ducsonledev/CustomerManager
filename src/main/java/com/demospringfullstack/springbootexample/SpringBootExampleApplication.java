@@ -33,7 +33,7 @@ public class SpringBootExampleApplication {
 					firstName + " " + lastName,
 					firstName.toLowerCase() + "." + lastName.toLowerCase()
 							+ "@mailservice.com",
-					random.nextInt(16, 99),
+					"password", random.nextInt(16, 99),
 					gender
 			);
 			customerRepository.save(customer);

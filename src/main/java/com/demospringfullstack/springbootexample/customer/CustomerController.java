@@ -1,17 +1,22 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.jwt.JWTUtil;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 // @CrossOrigin
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("api/v1/customers") // route path
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final JWTUtil jwtUtil;
 
     @GetMapping
     public List<Customer> getCustomers() {
@@ -26,9 +31,13 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void registerCustomer(
+    public ResponseEntity<?> registerCustomer(
             @RequestBody CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
+        String token = jwtUtil.issueToken(request.email(), "ROLE_USER");
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, token)
+                .build();
     }
 
     @DeleteMapping("{id}")
