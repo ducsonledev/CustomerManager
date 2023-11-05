@@ -25,7 +25,7 @@ class CustomerServiceTest {
 
     @BeforeEach
     void setUp() {
-        underTest = new CustomerService(customerDAO);
+        underTest = new CustomerService(customerDAO, passwordEncoder);
     }
 
     @Test
@@ -78,7 +78,7 @@ class CustomerServiceTest {
         when(customerDAO.existsPersonWithEmail(email)).thenReturn(false);
 
         var request = new CustomerRegistrationRequest(
-           "John", email, 21, Gender.MALE
+           "John", email, "password", 21, Gender.MALE
         );
 
         // When
@@ -106,7 +106,7 @@ class CustomerServiceTest {
         when(customerDAO.existsPersonWithEmail(email)).thenReturn(true);
 
         var request = new CustomerRegistrationRequest(
-                "John", email, 21, Gender.MALE
+                "John", email, "password", 21, Gender.MALE
         );
 
         // When
