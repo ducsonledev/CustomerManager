@@ -9,8 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.github.javafaker.Faker;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Random;
+import java.util.UUID;
 
 @SpringBootApplication
 public class SpringBootExampleApplication {
@@ -21,7 +23,9 @@ public class SpringBootExampleApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner(CustomerRepository customerRepository) {
+	CommandLineRunner runner(
+			CustomerRepository customerRepository,
+			PasswordEncoder passwordEncoder) {
 		return args -> {
 			var faker = new Faker();
 			var random = new Random();
@@ -33,7 +37,7 @@ public class SpringBootExampleApplication {
 					firstName + " " + lastName,
 					firstName.toLowerCase() + "." + lastName.toLowerCase()
 							+ "@mailservice.com",
-					"password", random.nextInt(16, 99),
+					passwordEncoder.encode(UUID.randomUUID().toString()), random.nextInt(16, 99),
 					gender
 			);
 			customerRepository.save(customer);
