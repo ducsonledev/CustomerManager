@@ -48,14 +48,14 @@ public class Customer implements UserDetails {
     @Column(
             nullable = false
     )
+    private String password;
+    @Column(
+            nullable = false
+    )
     private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    @Column(
-            nullable = false
-    )
-    private String password;
 
     public Customer(String name, String email, String password, Integer age, Gender gender) {
         this.name = name;

@@ -229,7 +229,7 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                id, updatedName, gender, email, age
+                id, updatedName, email, "password", age, gender
         );
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);

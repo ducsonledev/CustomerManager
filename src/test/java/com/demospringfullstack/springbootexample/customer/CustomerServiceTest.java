@@ -41,7 +41,7 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -58,7 +58,7 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.empty());
@@ -155,7 +155,7 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John",  "john@mailservice.com", "password", 22, Gender.MALE
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -184,7 +184,7 @@ class CustomerServiceTest {
                 "John Bolt", null, null
         );
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John",  "john@mailservice.com", "password", 22, Gender.MALE
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -213,7 +213,7 @@ class CustomerServiceTest {
                 null, newEmail, null
         );
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -242,7 +242,7 @@ class CustomerServiceTest {
                 null, null, 33
         );
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John", "john@mailservice.com", "password", 22,  Gender.MALE
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -292,10 +292,10 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
+                id, "John",  "john@mailservice.com", "password",22, Gender.MALE
         );
         Customer johnny = new Customer(
-                1, "Johnny", Gender.MALE, "johnny@mailservice.com", 21
+                1, "Johnny", "johnny@mailservice.com", "password", 21, Gender.MALE
         );
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
         when(customerDAO.existsPersonWithEmail(newEmail)).thenReturn(true);
@@ -314,8 +314,8 @@ class CustomerServiceTest {
         // Given
         int id = 10;
         Customer customer = new Customer(
-                id, "John", Gender.MALE, "john@mailservice.com", 22
-        );
+                id, "John", "john@mailservice.com", "password",22, Gender.MALE
+                );
         var request = new CustomerUpdateRequest(
                 customer.getName(), customer.getEmail(), customer.getAge()
         );
