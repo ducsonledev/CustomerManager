@@ -129,3 +129,7 @@ Random User Image: https://randomuser.me/
 ### Prerequisites
 
 See and copy dependencies to `pom.xml`.
+
+### models
+
+![authentication-architecture.png](..%2F..%2F..%2Fauthentication-architecture.png)
