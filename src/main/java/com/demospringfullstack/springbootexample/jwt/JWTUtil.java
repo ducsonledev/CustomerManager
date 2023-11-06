@@ -27,7 +27,8 @@ public class JWTUtil {
     }
 
     public String issueToken(String subject, Map<String, Object> claims) {
-        return Jwts.builder().claims(claims)
+        return Jwts.builder()
+                .claims(claims)
                 .subject(subject)
                 .issuer("http://localhost")
                 .issuedAt(Date.from(Instant.now()))
@@ -47,7 +48,7 @@ public class JWTUtil {
                 .parser()
                 .setSigningKey(getSigningKey())
                 .build()
-                .parseSignedClaims(token)
+                .parseClaimsJws(token)
                 .getPayload();
     }
 
@@ -55,4 +56,14 @@ public class JWTUtil {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
+    public boolean isTokenValid(String jwt, String username) {
+        String subject = getSubject(jwt);
+        return subject.equals(username) && !isTokenExpired(jwt);
+    }
+
+    private boolean isTokenExpired(String jwt) {
+        return getClaims(jwt).getExpiration().before(
+                    Date.from(Instant.now())
+                );
+    }
 }
