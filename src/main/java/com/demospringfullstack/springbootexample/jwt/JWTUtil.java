@@ -1,5 +1,6 @@
 package com.demospringfullstack.springbootexample.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 @Service
 public class JWTUtil {
-
+    // recent changes https://spring.io/blog/2023/10/18/spring-security-6-2-0-rc2-released
     private static final String SECRET_KEY =
             "foobar_123456789_foobar_123456789_foobar_123456789_foobar_123456789";
 
@@ -26,16 +27,28 @@ public class JWTUtil {
     }
 
     public String issueToken(String subject, Map<String, Object> claims) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuer("http://localhost")
-                .setIssuedAt(Date.from(Instant.now()))
-                .setExpiration(Date.from(Instant.now()
+        return Jwts.builder().claims(claims)
+                .subject(subject)
+                .issuer("http://localhost")
+                .issuedAt(Date.from(Instant.now()))
+                .expiration(Date.from(Instant.now()
                         .plus(15, ChronoUnit.DAYS)
                 ))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
+    }
+
+    public String getSubject(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts
+                .parser()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
     }
 
     private Key getSigningKey() {

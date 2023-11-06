@@ -133,3 +133,4 @@ See and copy dependencies to `pom.xml`.
 ### models
 
 ![authentication-architecture.png](..%2F..%2F..%2Fauthentication-architecture.png)
+![auth-cycle.png](..%2F..%2F..%2Fauth-cycle.png)
