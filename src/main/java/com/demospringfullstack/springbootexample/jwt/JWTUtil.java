@@ -30,10 +30,10 @@ public class JWTUtil {
         return Jwts.builder()
                 .claims(claims)
                 .subject(subject)
-                .issuer("http://localhost")
+                .issuer("http://localhost:8080/")
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(Date.from(Instant.now()
-                        .plus(15, ChronoUnit.DAYS)
+                .expiration(Date.from(
+                        Instant.now().plus(15, ChronoUnit.DAYS)
                 ))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
@@ -49,7 +49,7 @@ public class JWTUtil {
                 .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
-                .getPayload();
+                .getBody();
     }
 
     private Key getSigningKey() {
@@ -57,8 +57,7 @@ public class JWTUtil {
     }
 
     public boolean isTokenValid(String jwt, String username) {
-        String subject = getSubject(jwt);
-        return subject.equals(username) && !isTokenExpired(jwt);
+        return getSubject(jwt).equals(username) && !isTokenExpired(jwt);
     }
 
     private boolean isTokenExpired(String jwt) {
