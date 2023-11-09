@@ -8,23 +8,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
 
     private final CustomerDAO customerDAO;
     private final PasswordEncoder passwordEncoder;
+    private final CustomerDTOMapper customerDTOMapper;
 
-    public CustomerService(@Qualifier("jpa") CustomerDAO customerDAO, PasswordEncoder passwordEncoder) {
+    public CustomerService(@Qualifier("jpa") CustomerDAO customerDAO,
+                           PasswordEncoder passwordEncoder,
+                           CustomerDTOMapper customerDTOMapper) {
         this.customerDAO = customerDAO;
         this.passwordEncoder = passwordEncoder;
+        this.customerDTOMapper = customerDTOMapper;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerDAO.selectAllCustomer();
+    public List<CustomerDTO> getAllCustomers() {
+        return customerDAO.selectAllCustomer()
+                .stream()
+                .map(customerDTOMapper).collect(Collectors.toList());
     }
-    public Customer getCustomer(Integer id) {
+
+    public CustomerDTO getCustomer(Integer id) {
         return customerDAO.selectCustomerById(id)
+                .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "customer with id [%s] not found".formatted(id)
                 ));
@@ -61,7 +70,10 @@ public class CustomerService {
             Integer id,
             CustomerUpdateRequest updateRequest
     ) {
-        var customer = getCustomer(id);
+        Customer customer = customerDAO.selectCustomerById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "customer with id [%s] not found".formatted(id)
+                ));
 
         boolean changes = false;
         if (updateRequest.name() != null && !updateRequest.name().equals(customer.getName())) {

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,14 +18,15 @@ public class CustomerController {
 
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
+    private final AuthenticationProvider authenticationProvider;
 
     @GetMapping
-    public List<Customer> getCustomers() {
+    public List<CustomerDTO> getCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("{id}")
-    public Customer getCustomer(
+    public CustomerDTO getCustomer(
             @PathVariable("id") Integer id
     ) {
         return customerService.getCustomer(id);
