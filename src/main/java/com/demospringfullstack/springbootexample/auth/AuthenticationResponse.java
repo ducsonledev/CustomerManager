@@ -1,6 +1,9 @@
 package com.demospringfullstack.springbootexample.auth;
 
-public record AuthenticationResponse(
+import com.demospringfullstack.springbootexample.customer.CustomerDTO;
 
+public record AuthenticationResponse(
+    String token,
+    CustomerDTO customerDTO
 ) {
 }

@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth/login")
+@RequestMapping("/api/v1/auth")
 @AllArgsConstructor
-public class AuthController {
+public class AuthenticationController {
 
+    private final AuthenticationService authenticationService;
     private final AuthenticationProvider authenticationProvider;
     private final JWTUtil jwtUtil;
-    /*
-    @PostMapping
+
+    @PostMapping("/login")
     public ResponseEntity<?> loginCustomer(
             @RequestBody AuthenticationRequest request) {
-        //customerService.addCustomer(request);
-        authenticationProvider.authenticate(request.email(), request.password());
-        String token = jwtUtil.issueToken(request.email(), "ROLE_USER");
+        AuthenticationResponse response = authenticationService.login(request);
         return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, token)
-                .build();
-    }*/
+                .header(HttpHeaders.AUTHORIZATION, response.token())
+                .body(response); // remove later, no user information should be posted, no payloads like this wej ust returned
+        // only HTTP GET requests for user information
+    }
 }
