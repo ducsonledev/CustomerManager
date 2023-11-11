@@ -33,8 +33,8 @@ const AuthProvider = ({ children }) => {
             performLogin(usernameAndPassword).then(res => {
                 const jwtToken = res.headers["authorization"];
                 console.log(jwtToken)
-                //localStorage.setItem("access_token", jwtToken);
-
+                localStorage.setItem("access_token", jwtToken);
+                
                 //const decodedToken = jwtDecode(jwtToken);
 
                 /*setCustomer({
