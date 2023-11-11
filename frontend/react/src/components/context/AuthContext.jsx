@@ -41,6 +41,9 @@ const AuthProvider = ({ children }) => {
                     username: decodedToken.sub,
                     roles: decodedToken.scopes
                 })*/
+                setCustomer({
+                    ...res.data.customerDTO
+                })
                 resolve(res);
             }).catch(err => {
                 reject(err);
@@ -70,7 +73,7 @@ const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={{
             customer,
             login,
-            //logOut,
+            logOut,
             //isCustomerAuthenticated,
             //setCustomerFromToken
         }}>

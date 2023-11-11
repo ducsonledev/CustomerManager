@@ -33,6 +33,7 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
+import {useAuth} from "../context/AuthContext.jsx"
 //import { IconType } from 'react-icons'
 
 /*interface LinkItemProps {
@@ -129,6 +130,8 @@ const NavItem = ({ icon, children, ...rest }) => { //: NavItemProps
 }
 
 const MobileNav = ({ onOpen, ...rest }) => { // : MobileProps
+  const {logOut, customer} = useAuth();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -173,10 +176,12 @@ const MobileNav = ({ onOpen, ...rest }) => { // : MobileProps
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
-                  <Text fontSize="xs" color="gray.600">
-                    Admin
-                  </Text>
+                  <Text fontSize="sm">{customer?.name} - {customer?.email}</Text>
+                  {customer?.roles.map((role, id) => (  
+                    <Text id={id} fontSize="xs" color="gray.600">
+                      {role}
+                    </Text>
+                  ))}
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
@@ -190,7 +195,7 @@ const MobileNav = ({ onOpen, ...rest }) => { // : MobileProps
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={logOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
