@@ -22,7 +22,9 @@ public class SecurityFilterChainConfig {
 
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
-    public SecurityFilterChainConfig(AuthenticationProvider authenticationProvider, JWTAuthenticationFilter jwtAuthenticationFilter, AuthenticationEntryPoint authenticationEntryPoint) {
+    public SecurityFilterChainConfig(AuthenticationProvider authenticationProvider,
+                                     JWTAuthenticationFilter jwtAuthenticationFilter,
+                                     AuthenticationEntryPoint authenticationEntryPoint) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.authenticationEntryPoint = authenticationEntryPoint;
@@ -36,7 +38,7 @@ public class SecurityFilterChainConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST,
                         "/api/v1/customers",
-                        "/api/v1/auth/login"
+                                 "/api/v1/auth/login"
                  )
                 .permitAll()
                 .anyRequest()
