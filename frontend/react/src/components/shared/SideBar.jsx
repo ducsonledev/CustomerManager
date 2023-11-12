@@ -176,9 +176,9 @@ const MobileNav = ({ onOpen, ...rest }) => { // : MobileProps
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">{customer?.name} - {customer?.email}</Text>
+                  <Text fontSize="sm">{customer?.username}</Text>
                   {customer?.roles.map((role, id) => (  
-                    <Text id={id} fontSize="xs" color="gray.600">
+                    <Text id={id} key={id} fontSize="xs" color="gray.600">
                       {role}
                     </Text>
                   ))}

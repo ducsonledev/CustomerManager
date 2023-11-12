@@ -105,7 +105,7 @@ const Login = () => {
 
   useEffect(() => {
     if (customer) {
-        navigate("/dashboard/customers");
+        navigate("/dashboard");
     }
   })
 
@@ -129,8 +129,8 @@ const Login = () => {
             alignItems={"center"}
             justifyContent={"center"}
             bgGradient={{sm: 'linear(to-r, blue.600, purple.600)'}}>
-      <Text fontSize={"6xl"} color={'white'} fontWeight={"bold"} mb={5}>
-            <Link target={"_blank"} href={"https://www..de/"}>
+        <Text fontSize={"6xl"} color={'white'} fontWeight={"bold"} mb={5}>
+            <Link target={"_blank"} href={"#"}>
                 Sign Up Now!
             </Link>
         </Text>
