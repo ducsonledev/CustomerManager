@@ -36,7 +36,7 @@ public class Customer implements UserDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "customer_id_seq"
     )
-    private Integer id;
+    private Long id;
     @Column(
             nullable = false
     )

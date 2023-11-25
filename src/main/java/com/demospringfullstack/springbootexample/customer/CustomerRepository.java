@@ -7,14 +7,14 @@ import java.util.Optional;
 
 @Transactional
 public interface CustomerRepository
-        extends JpaRepository<Customer, Integer> {
+        extends JpaRepository<Customer, Long> {
 
     // JPA will construct the sql query for us without @Query
     // 4.4 Defining Query Methods 4.4.2 Query Creation
     // By deriving the query from the method name directly.
     // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
     boolean existsCustomerByEmail(String email);
-    boolean existsCustomerById(Integer id);
+    boolean existsCustomerById(Long id);
     Optional<Customer> findCustomerByEmail(String email);
 
 }

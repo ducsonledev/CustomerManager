@@ -31,7 +31,7 @@ public class CustomerService {
                 .map(customerDTOMapper).collect(Collectors.toList());
     }
 
-    public CustomerDTO getCustomer(Integer id) {
+    public CustomerDTO getCustomer(Long id) {
         return customerDAO.selectCustomerById(id)
                 .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -58,7 +58,7 @@ public class CustomerService {
         );
     }
 
-    public void removeCustomerById(Integer id) {
+    public void removeCustomerById(Long id) {
         if(!customerDAO.existsPersonWithId(id))
             throw new ResourceNotFoundException(
                     "customer with id [%s] not found".formatted(id)
@@ -67,7 +67,7 @@ public class CustomerService {
     }
 
     public void updateCustomer(
-            Integer id,
+            Long id,
             CustomerUpdateRequest updateRequest
     ) {
         Customer customer = customerDAO.selectCustomerById(id)

@@ -6,13 +6,13 @@ import java.util.Optional;
 public interface CustomerDAO {
 
     List<Customer> selectAllCustomer();
-    Optional<Customer> selectCustomerById(Integer Id);
+    Optional<Customer> selectCustomerById(Long id);
     void insertCustomer(Customer customer);
     boolean existsPersonWithEmail(String email);
 
-    void removeCustomerById(Integer id);
+    void removeCustomerById(Long id);
 
-    boolean existsPersonWithId(Integer id);
+    boolean existsPersonWithId(Long id);
 
     void updateCustomer(Customer updatedCustomer);
 

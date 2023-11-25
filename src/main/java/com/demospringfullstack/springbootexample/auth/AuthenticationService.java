@@ -5,9 +5,12 @@ import com.demospringfullstack.springbootexample.customer.CustomerDTO;
 import com.demospringfullstack.springbootexample.customer.CustomerDTOMapper;
 import com.demospringfullstack.springbootexample.jwt.JWTUtil;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import javax.management.BadAttributeValueExpException;
 
 @Service
 public class AuthenticationService {
@@ -31,6 +34,9 @@ public class AuthenticationService {
                         request.password()
                 )
         );
+        /*if(!authentication.isAuthenticated()) {
+            throw new BadCredentialsException(authentication.getDetails().toString());
+        }*/
         var principal = (Customer) authentication.getPrincipal();
         CustomerDTO customerDTO = customerDTOMapper.apply(principal);
         String token = jwtUtil.issueToken(customerDTO.username(), customerDTO.roles());

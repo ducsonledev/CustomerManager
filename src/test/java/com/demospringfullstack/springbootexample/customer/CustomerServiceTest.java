@@ -43,7 +43,7 @@ class CustomerServiceTest {
     @Test
     void canGetCustomer() {
         // Given
-        int id = 10;
+        Long id = 10L;
         Customer customer = new Customer(
                 id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
@@ -62,7 +62,7 @@ class CustomerServiceTest {
     @Test
     void willThrowWhenGetCustomerReturnEmptyOptional() {
         // Given
-        int id = 10;
+        Long id = 10L;
         Customer customer = new Customer(
                 id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
@@ -131,7 +131,7 @@ class CustomerServiceTest {
     @Test
     void removeCustomerById() {
         // Given
-        int id = 10;
+        Long id = 10L;
         when(customerDAO.existsPersonWithId(id)).thenReturn(true);
 
         // When
@@ -144,7 +144,7 @@ class CustomerServiceTest {
     @Test
     void willThrowWhenIdNotExistsWhileRemoveCustomerById() {
         // Given
-        int id = 10;
+        Long id = 10L;
         when(customerDAO.existsPersonWithId(id)).thenReturn(false);
 
         // When
@@ -159,7 +159,7 @@ class CustomerServiceTest {
     @Test
     void canUpdateAllCustomersProperties() {
         // Given
-        int id = 10;
+        Long id = 10L;
         String newEmail = "johnbolt@mailingservice.com";
         var request = new CustomerUpdateRequest(
                 "John Bolt", newEmail, 33
@@ -189,7 +189,7 @@ class CustomerServiceTest {
     @Test
     void canUpdateOnlyCustomerName() {
         // Given
-        int id = 10;
+        Long id = 10L;
         var request = new CustomerUpdateRequest(
                 "John Bolt", null, null
         );
@@ -217,7 +217,7 @@ class CustomerServiceTest {
     @Test
     void canUpdateOnlyCustomerEmail() {
         // Given
-        int id = 10;
+        Long id = 10L;
         String newEmail = "johnbolt@mailingservice.com";
         var request = new CustomerUpdateRequest(
                 null, newEmail, null
@@ -247,7 +247,7 @@ class CustomerServiceTest {
     @Test
     void canUpdateOnlyCustomerAge() {
         // Given
-        int id = 10;
+        Long id = 10L;
         var request = new CustomerUpdateRequest(
                 null, null, 33
         );
@@ -275,7 +275,7 @@ class CustomerServiceTest {
     @Test
     void willThrowWhenUpdateCustomerReturnEmptyOptional() {
         // Given
-        int id = 10;
+        Long id = 10L;
         boolean changes = false;
         var request = new CustomerUpdateRequest(
                 "John Bolt", "john@mailingservice.com", 33
@@ -295,7 +295,7 @@ class CustomerServiceTest {
     @Test
     void willThrowWhenEmailExistsWhileUpdateCustomer() {
         // Given
-        int id = 10;
+        Long id = 10L;
         // boolean changes = false;
         String newEmail = "johnny@mailservice.com";
         var request = new CustomerUpdateRequest(
@@ -305,7 +305,7 @@ class CustomerServiceTest {
                 id, "John",  "john@mailservice.com", "password",22, Gender.MALE
         );
         Customer johnny = new Customer(
-                1, "Johnny", "johnny@mailservice.com", "password", 21, Gender.MALE
+                1L, "Johnny", "johnny@mailservice.com", "password", 21, Gender.MALE
         );
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
         when(customerDAO.existsPersonWithEmail(newEmail)).thenReturn(true);
@@ -322,7 +322,7 @@ class CustomerServiceTest {
     @Test
     void willThrowWhenNoChangesWhileUpdateCustomer() {
         // Given
-        int id = 10;
+        Long id = 10L;
         Customer customer = new Customer(
                 id, "John", "john@mailservice.com", "password",22, Gender.MALE
                 );
