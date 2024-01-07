@@ -73,7 +73,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         );
         underTest.save(customer);
 
-        int id = underTest.findAll()
+        Long id = underTest.findAll()
                 .stream()
                 .filter(c -> c.getEmail().equals(email))
                 .map(Customer::getId)
@@ -92,7 +92,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
         // Given
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
 
-        int id = -1;
+        Long id = -1L;
 
         // When
         var actual = underTest.existsCustomerById(id);

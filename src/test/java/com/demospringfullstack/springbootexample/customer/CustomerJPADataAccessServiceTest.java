@@ -40,7 +40,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void selectCustomerById() {
         // Given
-        int id = 1;
+        Long id = 1L;
 
         // When
         underTest.selectCustomerById(id);
@@ -53,7 +53,7 @@ class CustomerJPADataAccessServiceTest {
     void insertCustomer() {
         // Given
         Customer customer = new Customer(
-                1, "john", "john@mailservice.com", "password", 33, Gender.MALE
+                1L, "john", "john@mailservice.com", "password", 33, Gender.MALE
         );
 
         // When
@@ -78,7 +78,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void existsPersonWithId() {
         // Given
-        int id = 1;
+        Long id = 1L;
 
         // When
         underTest.existsPersonWithId(id);
@@ -90,7 +90,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void removeCustomerById() {
         // Given
-        int id = 1;
+        Long id = 1L;
 
         // When
         underTest.removeCustomerById(id);
@@ -103,7 +103,7 @@ class CustomerJPADataAccessServiceTest {
     void updateCustomer() {
         // Given
         Customer customer = new Customer(
-                1, "john bolt", "johnbolt@mailservice.com", "password", 33, Gender.MALE
+                1L, "john bolt", "johnbolt@mailservice.com", "password", 33, Gender.MALE
         );
 
         // When
