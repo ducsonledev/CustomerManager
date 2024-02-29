@@ -1,6 +1,6 @@
 package com.demospringfullstack.springbootexample.auth;
 
-import com.demospringfullstack.springbootexample.jwt.JWTUtil;
+import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.demospringfullstack.springbootexample.security;
 
-import com.demospringfullstack.springbootexample.jwt.JWTAuthenticationFilter;
+import com.demospringfullstack.springbootexample.security.jwt.JWTAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableMethodSecurity // TODO research: vs EnableMethodSecurity?
+@EnableMethodSecurity // TODO research: EnableWebSecurity vs EnableMethodSecurity?
 @RequiredArgsConstructor
 public class SecurityConfig {
     public static final String[] WHITE_LIST_POST_URL = {"/api/v1/customers",

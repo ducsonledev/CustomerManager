@@ -1,6 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
-import com.demospringfullstack.springbootexample.jwt.JWTUtil;
+import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("api/v1/customers") // route path
 public class CustomerController {
-
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
-    private final AuthenticationProvider authenticationProvider;
 
     @GetMapping
     public List<CustomerDTO> getCustomers() {

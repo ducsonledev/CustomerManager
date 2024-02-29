@@ -1,4 +1,4 @@
-package com.demospringfullstack.springbootexample.jwt;
+package com.demospringfullstack.springbootexample.security.jwt;
 
 import com.demospringfullstack.springbootexample.customer.CustomerUserDetailsService;
 import jakarta.servlet.FilterChain;

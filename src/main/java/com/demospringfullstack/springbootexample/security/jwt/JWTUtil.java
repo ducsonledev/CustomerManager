@@ -1,4 +1,4 @@
-package com.demospringfullstack.springbootexample.jwt;
+package com.demospringfullstack.springbootexample.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
