@@ -1,4 +1,4 @@
-package com.demospringfullstack.springbootexample.exception;
+package com.demospringfullstack.springbootexample.exception.handler;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

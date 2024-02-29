@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Service
 public class JWTUtil {
-    // recent changes https://spring.io/blog/2023/10/18/spring-security-6-2-0-rc2-released
     private static final String SECRET_KEY =
             "foobar_123456789_foobar_123456789_foobar_123456789_foobar_123456789";
 

@@ -1,4 +1,4 @@
-package com.demospringfullstack.springbootexample.exception;
+package com.demospringfullstack.springbootexample.exception.custom;
 
 
 import org.springframework.http.HttpStatus;

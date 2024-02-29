@@ -1,4 +1,4 @@
-package com.demospringfullstack.springbootexample.security;
+package com.demospringfullstack.springbootexample.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

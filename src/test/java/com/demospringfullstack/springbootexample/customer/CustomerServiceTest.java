@@ -1,8 +1,8 @@
 package com.demospringfullstack.springbootexample.customer;
 
-import com.demospringfullstack.springbootexample.exception.DuplicateResourceException;
-import com.demospringfullstack.springbootexample.exception.RequestValidationException;
-import com.demospringfullstack.springbootexample.exception.ResourceNotFoundException;
+import com.demospringfullstack.springbootexample.exception.custom.DuplicateResourceException;
+import com.demospringfullstack.springbootexample.exception.custom.RequestValidationException;
+import com.demospringfullstack.springbootexample.exception.custom.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
