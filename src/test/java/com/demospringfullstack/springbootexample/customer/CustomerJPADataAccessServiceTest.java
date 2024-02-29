@@ -52,7 +52,7 @@ class CustomerJPADataAccessServiceTest {
     @Test
     void insertCustomer() {
         // Given
-        Customer customer = new Customer(
+        var customer = new Customer(
                 1L, "john", "john@mailservice.com", "password", 33, Gender.MALE
         );
 

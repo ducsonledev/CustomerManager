@@ -63,7 +63,7 @@ class CustomerServiceTest {
     void willThrowWhenGetCustomerReturnEmptyOptional() {
         // Given
         Long id = 10L;
-        Customer customer = new Customer(
+        var customer = new Customer(
                 id, "John", "john@mailservice.com", "password", 22, Gender.MALE
         );
         // if this works returns optional
