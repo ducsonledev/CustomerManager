@@ -8,10 +8,10 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 public abstract class AbstractTestcontainers {
-
     protected static final Faker FAKER = new Faker();
 
     @BeforeAll
@@ -28,7 +28,7 @@ public abstract class AbstractTestcontainers {
 
     @Container
     protected static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<>("postgres:latest")
+            new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"))
                 .withDatabaseName("sonscode-dao-unit-test")
                 .withUsername("sonscode")
                 .withPassword("password");
@@ -36,6 +36,7 @@ public abstract class AbstractTestcontainers {
     @DynamicPropertySource
     private static void registerDataSourceProperties(DynamicPropertyRegistry registry) {
         // map application.yml to our test container
+        postgreSQLContainer.start();
         registry.add(
             "spring.datasource.url",
             postgreSQLContainer::getJdbcUrl

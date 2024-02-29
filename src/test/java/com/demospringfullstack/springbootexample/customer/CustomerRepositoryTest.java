@@ -6,33 +6,31 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.ApplicationContext;
 
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // no embedded database
-    // connecting to our docker db, which is not desired
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CustomerRepositoryTest extends AbstractTestcontainers {
 
     @Autowired
     private CustomerRepository underTest;
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    //@Autowired
+    //private ApplicationContext applicationContext;
 
     @BeforeEach
     void setUp() {
-        underTest.deleteAll();
-        System.out.println(applicationContext.getBeanDefinitionCount());
+        //underTest.deleteAll();
+        //System.out.println(applicationContext.getBeanDefinitionCount());
     }
 
     @Test
     void existsCustomerByEmail() {
         // Given
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(
+        var customer = new Customer(
                 FAKER.name().fullName(),
                 email,
                 "password",
@@ -64,7 +62,7 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
     void existsCustomerById() {
         // Given
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
-        Customer customer = new Customer(
+        var customer = new Customer(
                 FAKER.name().fullName(),
                 email,
                 "password",

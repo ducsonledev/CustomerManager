@@ -25,7 +25,6 @@ import java.util.List;
     }
 )
 public class Customer implements UserDetails {
-
     @Id
     @SequenceGenerator(
             name = "customer_id_seq",

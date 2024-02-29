@@ -3,6 +3,7 @@ package com.demospringfullstack.springbootexample;
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRepository;
 import com.demospringfullstack.springbootexample.customer.Gender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,12 +17,11 @@ import java.util.UUID;
 
 @SpringBootApplication
 public class SpringBootExampleApplication {
-
 	public static void main(String[] args) {
 
 		SpringApplication.run(SpringBootExampleApplication.class, args);
 	}
-
+	/*
 	@Bean
 	CommandLineRunner runner(
 			CustomerRepository customerRepository,
@@ -42,5 +42,5 @@ public class SpringBootExampleApplication {
 			);
 			customerRepository.save(customer);
 		};
-	}
+	}*/
 }

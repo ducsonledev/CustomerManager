@@ -1,7 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
 import com.demospringfullstack.springbootexample.jwt.JWTUtil;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// @CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/customers") // route path

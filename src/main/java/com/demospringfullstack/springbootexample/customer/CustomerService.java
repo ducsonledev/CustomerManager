@@ -3,6 +3,7 @@ package com.demospringfullstack.springbootexample.customer;
 import com.demospringfullstack.springbootexample.exception.DuplicateResourceException;
 import com.demospringfullstack.springbootexample.exception.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.ResourceNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,11 +13,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
-
     private final CustomerDAO customerDAO;
     private final PasswordEncoder passwordEncoder;
     private final CustomerDTOMapper customerDTOMapper;
 
+    @Autowired
     public CustomerService(@Qualifier("jpa") CustomerDAO customerDAO,
                            PasswordEncoder passwordEncoder,
                            CustomerDTOMapper customerDTOMapper) {
