@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
 class CustomerJPADataAccessServiceTest {
-
     private CustomerJPADataAccessService underTest;
     private AutoCloseable autoCloseable;
     @Mock private CustomerRepository customerRepository;
@@ -53,7 +52,12 @@ class CustomerJPADataAccessServiceTest {
     void insertCustomer() {
         // Given
         var customer = new Customer(
-                1L, "john", "john@mailservice.com", "password", 33, Gender.MALE
+                1L,
+                "john",
+                "john@mailservice.com",
+                "password",
+                33,
+                Gender.MALE
         );
 
         // When
@@ -103,7 +107,12 @@ class CustomerJPADataAccessServiceTest {
     void updateCustomer() {
         // Given
         Customer customer = new Customer(
-                1L, "john bolt", "johnbolt@mailservice.com", "password", 33, Gender.MALE
+                1L,
+                "john bolt",
+                "johnbolt@mailservice.com",
+                "password",
+                33,
+                Gender.MALE
         );
 
         // When

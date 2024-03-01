@@ -6,9 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
 public abstract class AbstractTestcontainers {
@@ -16,7 +14,8 @@ public abstract class AbstractTestcontainers {
 
     @BeforeAll
     static void beforeAll() {
-        Flyway flyway = Flyway
+        postgreSQLContainer.start();
+        var flyway = Flyway
                 .configure()
                 .dataSource(
                         postgreSQLContainer.getJdbcUrl(),
@@ -26,9 +25,10 @@ public abstract class AbstractTestcontainers {
         flyway.migrate();
     }
 
-    @Container
+    //@Container // with singleton container pattern
+    // https://java.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers
     protected static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"))
+            new PostgreSQLContainer<>("postgres:latest")
                 .withDatabaseName("sonscode-dao-unit-test")
                 .withUsername("sonscode")
                 .withPassword("password");
@@ -36,7 +36,6 @@ public abstract class AbstractTestcontainers {
     @DynamicPropertySource
     private static void registerDataSourceProperties(DynamicPropertyRegistry registry) {
         // map application.yml to our test container
-        postgreSQLContainer.start();
         registry.add(
             "spring.datasource.url",
             postgreSQLContainer::getJdbcUrl
@@ -50,5 +49,4 @@ public abstract class AbstractTestcontainers {
             postgreSQLContainer::getPassword
         );
     }
-
 }

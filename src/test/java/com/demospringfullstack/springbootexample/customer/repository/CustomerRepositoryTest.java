@@ -1,6 +1,10 @@
-package com.demospringfullstack.springbootexample.customer;
+package com.demospringfullstack.springbootexample.customer.repository;
 
 import com.demospringfullstack.springbootexample.AbstractTestcontainers;
+import com.demospringfullstack.springbootexample.customer.Customer;
+import com.demospringfullstack.springbootexample.customer.CustomerRepository;
+import com.demospringfullstack.springbootexample.customer.Gender;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +26,13 @@ class CustomerRepositoryTest extends AbstractTestcontainers {
 
     @BeforeEach
     void setUp() {
-        //underTest.deleteAll();
+        underTest.deleteAll();
         //System.out.println(applicationContext.getBeanDefinitionCount());
+    }
+
+    @BeforeAll
+    static void startContainers() {
+        postgreSQLContainer.start();
     }
 
     @Test
