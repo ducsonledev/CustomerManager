@@ -21,7 +21,7 @@ public class SpringBootExampleApplication {
 
 		SpringApplication.run(SpringBootExampleApplication.class, args);
 	}
-	/*
+
 	@Bean
 	CommandLineRunner runner(
 			CustomerRepository customerRepository,
@@ -42,5 +42,5 @@ public class SpringBootExampleApplication {
 			);
 			customerRepository.save(customer);
 		};
-	}*/
+	}
 }

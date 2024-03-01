@@ -3,12 +3,14 @@ package com.demospringfullstack.springbootexample;
 import com.github.javafaker.Faker;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
+@Import(TestConfig.class)
 public abstract class AbstractTestcontainers {
     protected static final Faker FAKER = new Faker();
 

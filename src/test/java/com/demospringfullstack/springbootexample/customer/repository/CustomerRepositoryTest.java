@@ -1,6 +1,7 @@
 package com.demospringfullstack.springbootexample.customer.repository;
 
 import com.demospringfullstack.springbootexample.AbstractTestcontainers;
+import com.demospringfullstack.springbootexample.TestConfig;
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRepository;
 import com.demospringfullstack.springbootexample.customer.Gender;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 
 import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
