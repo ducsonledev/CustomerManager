@@ -41,7 +41,8 @@ public class Customer implements UserDetails {
     )
     private String name;
     @Column(
-            nullable = false
+            nullable = false,
+            unique = true
     )
     private String email;
     @Column(
