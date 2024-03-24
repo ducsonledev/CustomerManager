@@ -11,7 +11,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     // 4.4 Defining Query Methods 4.4.2 Query Creation
     // By deriving the query from the method name directly.
     // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/
-    boolean existsCustomerByEmail(String email);
+    boolean existsByEmail(String email);
     boolean existsCustomerById(Long id);
     Optional<Customer> findCustomerByEmail(String email);
 

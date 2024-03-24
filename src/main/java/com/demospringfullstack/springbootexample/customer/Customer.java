@@ -1,15 +1,15 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -57,17 +57,26 @@ public class Customer implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    public Customer(String name, String email, String password, Integer age, Gender gender) {
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public Customer(String name,
+                    String email,
+                    String password,
+                    Integer age,
+                    Gender gender,
+                    Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.age = age;
         this.gender = gender;
+        this.role = role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return role.getAuthorities();
     }
 
     @Override

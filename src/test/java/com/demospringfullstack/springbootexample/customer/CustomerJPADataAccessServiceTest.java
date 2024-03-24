@@ -1,5 +1,7 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,7 +59,8 @@ class CustomerJPADataAccessServiceTest {
                 "john@mailservice.com",
                 "password",
                 33,
-                Gender.MALE
+                Gender.MALE,
+                Role.USER
         );
 
         // When
@@ -76,7 +79,7 @@ class CustomerJPADataAccessServiceTest {
         underTest.existsPersonWithEmail(email);
 
         // Then
-        verify(customerRepository).existsCustomerByEmail(email);
+        verify(customerRepository).existsByEmail(email);
     }
 
     @Test
@@ -112,7 +115,8 @@ class CustomerJPADataAccessServiceTest {
                 "johnbolt@mailservice.com",
                 "password",
                 33,
-                Gender.MALE
+                Gender.MALE,
+                Role.USER
         );
 
         // When

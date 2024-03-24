@@ -24,7 +24,7 @@ public class AuthenticationController {
         AuthenticationResponse response = authenticationService.login(request);
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, response.token())
-                .body(response); // remove later, no user information should be posted, no payloads like this wej ust returned
-        // only HTTP GET requests for user information
+                .body(response); // remove later, no user information should be posted, no payloads like this we just returned
+                                // only HTTP GET requests for user information
     }
 }

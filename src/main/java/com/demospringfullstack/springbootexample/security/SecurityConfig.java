@@ -21,12 +21,13 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.demospringfullstack.springbootexample.enums.Role.*;
+
 @Configuration
-@EnableMethodSecurity // TODO research: EnableWebSecurity vs EnableMethodSecurity?
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    public static final String[] WHITE_LIST_POST_URL = {"/api/v1/customers",
-                                                        "/api/v1/auth/login"};
+    public static final String[] WHITE_LIST_URL = {"api/v1/customers", "/api/v1/auth/login"};
     private final UserDetailsService userDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -58,9 +59,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(HttpMethod.POST,
-                                         WHITE_LIST_POST_URL
+                                WHITE_LIST_URL
                         )
                         .permitAll()
+                        .requestMatchers("/api/v1/customers").hasAnyRole(ADMIN.name(), MANAGER.name())
                         .anyRequest()
                         .authenticated()
                 )

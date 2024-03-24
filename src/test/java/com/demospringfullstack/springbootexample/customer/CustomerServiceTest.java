@@ -1,5 +1,7 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import com.demospringfullstack.springbootexample.exception.custom.DuplicateResourceException;
 import com.demospringfullstack.springbootexample.exception.custom.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.custom.ResourceNotFoundException;
@@ -45,7 +47,12 @@ class CustomerServiceTest {
         // Given
         Long id = 10L;
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
+                id, "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -64,7 +71,13 @@ class CustomerServiceTest {
         // Given
         Long id = 10L;
         var customer = new Customer(
-                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
         // if this works returns optional
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.empty());
@@ -84,7 +97,12 @@ class CustomerServiceTest {
         when(customerDAO.existsPersonWithEmail(email)).thenReturn(false);
 
         var request = new CustomerRegistrationRequest(
-           "John", email, "password", 21, Gender.MALE
+           "John",
+                email,
+                "password",
+                21,
+                Gender.MALE,
+                Role.USER
         );
 
         String passwordHash = "hj4hjh4545;;kfg";
@@ -116,7 +134,12 @@ class CustomerServiceTest {
         when(customerDAO.existsPersonWithEmail(email)).thenReturn(true);
 
         var request = new CustomerRegistrationRequest(
-                "John", email, "password", 21, Gender.MALE
+                "John",
+                email,
+                "password",
+                21,
+                Gender.MALE,
+                Role.USER
         );
 
         // When
@@ -165,7 +188,13 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John",  "john@mailservice.com", "password", 22, Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -194,7 +223,13 @@ class CustomerServiceTest {
                 "John Bolt", null, null
         );
         Customer customer = new Customer(
-                id, "John",  "john@mailservice.com", "password", 22, Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -223,7 +258,13 @@ class CustomerServiceTest {
                 null, newEmail, null
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", "password", 22, Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -252,7 +293,13 @@ class CustomerServiceTest {
                 null, null, 33
         );
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", "password", 22,  Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
 
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
@@ -302,10 +349,22 @@ class CustomerServiceTest {
                 "John Bolt", newEmail, 33
         );
         Customer customer = new Customer(
-                id, "John",  "john@mailservice.com", "password",22, Gender.MALE
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
         );
         Customer johnny = new Customer(
-                1L, "Johnny", "johnny@mailservice.com", "password", 21, Gender.MALE
+                1L,
+                "Johnny",
+                "johnny@mailservice.com",
+                "password",
+                21,
+                Gender.MALE,
+                Role.USER
         );
         when(customerDAO.selectCustomerById(id)).thenReturn(Optional.of(customer));
         when(customerDAO.existsPersonWithEmail(newEmail)).thenReturn(true);
@@ -324,8 +383,14 @@ class CustomerServiceTest {
         // Given
         Long id = 10L;
         Customer customer = new Customer(
-                id, "John", "john@mailservice.com", "password",22, Gender.MALE
-                );
+                id,
+                "John",
+                "john@mailservice.com",
+                "password",
+                22,
+                Gender.MALE,
+                Role.USER
+        );
         var request = new CustomerUpdateRequest(
                 customer.getName(), customer.getEmail(), customer.getAge()
         );

@@ -1,5 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Role;
 import com.demospringfullstack.springbootexample.exception.custom.DuplicateResourceException;
 import com.demospringfullstack.springbootexample.exception.custom.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.custom.ResourceNotFoundException;
@@ -54,7 +55,8 @@ public class CustomerService {
                         customerRegistrationRequest.email(),
                         passwordEncoder.encode(customerRegistrationRequest.password()),
                         customerRegistrationRequest.age(),
-                        customerRegistrationRequest.gender()
+                        customerRegistrationRequest.gender(),
+                        customerRegistrationRequest != null ? customerRegistrationRequest.role() : Role.USER
                 )
         );
     }

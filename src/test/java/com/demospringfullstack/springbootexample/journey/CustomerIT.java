@@ -3,7 +3,8 @@ package com.demospringfullstack.springbootexample.journey;
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRegistrationRequest;
 import com.demospringfullstack.springbootexample.customer.CustomerUpdateRequest;
-import com.demospringfullstack.springbootexample.customer.Gender;
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Name;
 import org.junit.jupiter.api.Test;
@@ -42,8 +43,14 @@ public class CustomerIT {
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
+        Role role = Role.USER;
         var request = new CustomerRegistrationRequest(
-                name, email, "password", age, gender
+                name, 
+                email, 
+                "password", 
+                age, 
+                gender,
+                role
         );
 
         // send a post request
@@ -71,7 +78,12 @@ public class CustomerIT {
 
         // make sure that customer is present
         Customer expectedCustomer = new Customer(
-                name, email, "password", age, gender
+                name,
+                email,
+                "password",
+                age,
+                gender,
+                role
         );
 
         assertThat(allCustomers)
@@ -109,8 +121,14 @@ public class CustomerIT {
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
+        Role role = Role.USER;
         var request = new CustomerRegistrationRequest(
-                name, email, "password", age, gender
+                name,
+                email,
+                "password",
+                age,
+                gender,
+                role
         );
 
         // send a post request
@@ -169,8 +187,14 @@ public class CustomerIT {
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
+        Role role = Role.USER;
         var request = new CustomerRegistrationRequest(
-                name, email, "password", age, gender
+                name,
+                email,
+                "password",
+                age,
+                gender,
+                role
         );
 
         // send a post request
@@ -229,7 +253,13 @@ public class CustomerIT {
                 .getResponseBody();
 
         Customer expectedCustomer = new Customer(
-                id, updatedName, email, "password", age, gender
+                id,
+                updatedName,
+                email,
+                "password",
+                age,
+                gender,
+                role
         );
 
         assertThat(updatedCustomer).isEqualTo(expectedCustomer);

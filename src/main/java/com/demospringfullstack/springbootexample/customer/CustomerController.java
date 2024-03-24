@@ -4,7 +4,6 @@ import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

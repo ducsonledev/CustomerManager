@@ -1,5 +1,7 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -15,11 +17,11 @@ public class CustomerListDataAccessService implements CustomerDAO {
     static {
         customers = new ArrayList<>();
         Customer alex = new Customer(
-                1L, "Alex",  "test@mail.com", "password", 21, Gender.MALE
+                1L, "Alex",  "test@mail.com", "password", 21, Gender.MALE, Role.USER
         );
         customers.add(alex);
         Customer jamila = new Customer(
-                2L, "Jamila", "test@mail.com", "password", 33, Gender.FEMALE
+                2L, "Jamila", "test@mail.com", "password", 33, Gender.FEMALE, Role.USER
         );
         customers.add(jamila);
     }

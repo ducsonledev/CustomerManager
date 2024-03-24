@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository("jpa")
 @RequiredArgsConstructor
 public class CustomerJPADataAccessService implements CustomerDAO {
-
     private final CustomerRepository customerRepository;
 
     @Override
@@ -19,7 +18,6 @@ public class CustomerJPADataAccessService implements CustomerDAO {
 
     @Override
     public Optional<Customer> selectCustomerById(Long id) {
-
         return customerRepository.findById(id);
     }
 
@@ -30,13 +28,11 @@ public class CustomerJPADataAccessService implements CustomerDAO {
 
     @Override
     public boolean existsPersonWithEmail(String email) {
-
-        return customerRepository.existsCustomerByEmail(email);
+        return customerRepository.existsByEmail(email);
     }
 
     @Override
     public boolean existsPersonWithId(Long id) {
-
         return customerRepository.existsCustomerById(id);
     }
 

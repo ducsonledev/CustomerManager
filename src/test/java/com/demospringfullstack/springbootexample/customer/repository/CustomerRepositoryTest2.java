@@ -3,7 +3,8 @@ package com.demospringfullstack.springbootexample.customer.repository;
 import com.demospringfullstack.springbootexample.AbstractTestcontainers;
 import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerRepository;
-import com.demospringfullstack.springbootexample.customer.Gender;
+import com.demospringfullstack.springbootexample.enums.Gender;
+import com.demospringfullstack.springbootexample.enums.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,13 @@ class CustomerRepositoryTest2 extends AbstractTestcontainers {
                 email,
                 "password",
                 20,
-                Gender.MALE
+                Gender.MALE,
+                Role.USER
         );
         underTest.save(customer);
 
         // When
-        var actual = underTest.existsCustomerByEmail(email);
+        var actual = underTest.existsByEmail(email);
 
         // Then
         assertThat(actual).isTrue();
@@ -56,7 +58,7 @@ class CustomerRepositoryTest2 extends AbstractTestcontainers {
         String email = FAKER.internet().safeEmailAddress() + "-" + UUID.randomUUID();
 
         // When
-        var actual = underTest.existsCustomerByEmail(email);
+        var actual = underTest.existsByEmail(email);
 
         // Then
         assertThat(actual).isFalse();
@@ -71,7 +73,8 @@ class CustomerRepositoryTest2 extends AbstractTestcontainers {
                 email,
                 "password",
                 20,
-                Gender.FEMALE
+                Gender.FEMALE,
+                Role.USER
         );
         underTest.save(customer);
 
