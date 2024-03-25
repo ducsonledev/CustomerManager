@@ -6,6 +6,7 @@ DEFAULT('USER');
 
 CREATE FUNCTION role_cast(varchar) RETURNS Role AS $$
     SELECT CASE $1
+        WHEN 'USER' THEN 'USER'::Role
         WHEN 'ADMIN' THEN 'ADMIN'::Role
         WHEN 'MANAGER' THEN 'MANAGER'::Role
     END;
