@@ -1,6 +1,7 @@
 package com.demospringfullstack.springbootexample.journey;
 
 import com.demospringfullstack.springbootexample.customer.Customer;
+import com.demospringfullstack.springbootexample.customer.CustomerDTO;
 import com.demospringfullstack.springbootexample.customer.CustomerRegistrationRequest;
 import com.demospringfullstack.springbootexample.customer.CustomerUpdateRequest;
 import com.demospringfullstack.springbootexample.enums.Gender;
@@ -11,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
@@ -43,7 +46,7 @@ public class CustomerIT {
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
-        Role role = Role.USER;
+        Role role = Role.ADMIN;
         var request = new CustomerRegistrationRequest(
                 name, 
                 email, 
@@ -54,59 +57,61 @@ public class CustomerIT {
         );
 
         // send a post request
-
-        webTestClient.post()
+        String jwtToken = webTestClient.post()
                 .uri(CUSTOMER_URI)// no localhost/ports in here, just to locate where in our api
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
                 .exchange()// send the request
                 .expectStatus()
-                .isOk();
+                .isOk()
+                .returnResult(Void.class)
+                .getResponseHeaders()
+                .get(HttpHeaders.AUTHORIZATION)
+                .get(0);
 
         // get all customers
-        List<Customer> allCustomers = webTestClient.get()
+        List<CustomerDTO> allCustomers = webTestClient.get()
                 .uri(CUSTOMER_URI)
                 .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBodyList(new ParameterizedTypeReference<Customer>() {
+                .expectBodyList(new ParameterizedTypeReference<CustomerDTO>() {
                 })
                 .returnResult()
                 .getResponseBody();
 
-        // make sure that customer is present
-        Customer expectedCustomer = new Customer(
-                name,
-                email,
-                "password",
-                age,
-                gender,
-                role
-        );
-
-        assertThat(allCustomers)
-                .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
-                .contains(expectedCustomer);
-
         var id = allCustomers.stream()
-                .filter(customer -> customer.getEmail().equals(email))
-                .map(Customer::getId)
+                .filter(customer -> customer.email().equals(email))
+                .map(CustomerDTO::id)
                 .findFirst()
                 .orElseThrow();
 
-        expectedCustomer.setId(id);
+        // make sure that customer is present with id
+        CustomerDTO expectedCustomer = new CustomerDTO(
+                id,
+                name,
+                email,
+                gender,
+                role,
+                age,
+                role.getAuthorities().stream().map(SimpleGrantedAuthority::toString).toList(),
+                email // username = email
+        );
+
+        assertThat(allCustomers).contains(expectedCustomer);
 
         // get customer by id
         webTestClient.get()
                 .uri(CUSTOMER_URI + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBody(new ParameterizedTypeReference<Customer>() {
-                })
+                .expectBody(new ParameterizedTypeReference<CustomerDTO>() {})
                 .isEqualTo(expectedCustomer);
     }
 
