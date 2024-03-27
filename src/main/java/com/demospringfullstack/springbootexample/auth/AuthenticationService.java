@@ -28,6 +28,6 @@ public class AuthenticationService {
         CustomerDTO customerDTO = customerDTOMapper.apply(principal);
         String token = jwtUtil.issueToken(customerDTO.username(), customerDTO.roles());
 
-        return  new AuthenticationResponse(token, customerDTO);
+        return new AuthenticationResponse(token, customerDTO);
     }
 }

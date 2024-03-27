@@ -31,7 +31,7 @@ public class CustomerController {
     public ResponseEntity<?> registerCustomer(
             @RequestBody CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
-        String token = jwtUtil.issueToken(request.email(), "ROLE_USER");
+        String token = jwtUtil.issueToken(request.email(), request.role().name());
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .build();
