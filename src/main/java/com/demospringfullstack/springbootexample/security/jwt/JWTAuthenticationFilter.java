@@ -27,12 +27,12 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         String authHeader = getAuthorization(request);
-        // anyone with the bearer token can impersonate you
+        // if rejected
         if (!isJwtAuth(authHeader)) {
             filterChain.doFilter(request, response);
             return;
         }
-        // if rejected
+        // anyone with the bearer token can impersonate you
         getAuth(request, getJwtToken(authHeader));
         filterChain.doFilter(request, response); // moving to the next filter on the chain
     }

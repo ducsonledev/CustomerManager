@@ -12,6 +12,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,10 +26,12 @@ import static com.demospringfullstack.springbootexample.enums.Permission.*;
 import static com.demospringfullstack.springbootexample.enums.Role.*;
 
 @Configuration
+//@EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
     private static final String[] WHITE_LIST_URL = {"api/v1/customers", "/api/v1/auth/login"};
+    private static final String[] WHITE_LIST_URL2 = {"/api/v1/auth/login"};
     private final UserDetailsService userDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -61,12 +64,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(HttpMethod.POST,
-                                         WHITE_LIST_URL
+                        .requestMatchers(//HttpMethod.POST,
+                                         WHITE_LIST_URL2
                         )
                         .permitAll()
-                        .requestMatchers("/api/v1/customers/**").hasAnyRole(ADMIN.name(), MANAGER.name())
-                        .requestMatchers(HttpMethod.GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                        //.requestMatchers(HttpMethod.GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                        //.requestMatchers("/api/v1/customers/**").hasAnyRole(ADMIN.name(), MANAGER.name())
                         .anyRequest()
                         .authenticated()
                 )
