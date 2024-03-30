@@ -43,6 +43,7 @@ public class DefaultExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }
 
+    // PasswordEncoder.encode(): "rawPassword cannot be null"
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiError> handleException(IllegalArgumentException e,
                                                     HttpServletRequest request,

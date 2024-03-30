@@ -1,6 +1,7 @@
 package com.demospringfullstack.springbootexample.customer;
 
 import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<?> registerCustomer(
-            @RequestBody CustomerRegistrationRequest request) {
+            @RequestBody @Valid CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
         String token = jwtUtil.issueToken(request.email(), request.role().name());
         return ResponseEntity.ok()
@@ -49,7 +50,7 @@ public class CustomerController {
     @PutMapping("{id}")
     public void updateCustomer(
             @PathVariable Long id,
-            @RequestBody CustomerUpdateRequest updateRequest
+            @RequestBody @Valid CustomerUpdateRequest updateRequest
     ) {
         customerService.updateCustomer(id, updateRequest);
     }
