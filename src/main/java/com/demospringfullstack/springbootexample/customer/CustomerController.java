@@ -17,6 +17,17 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
+    
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN_CREATE') or hasAuthority('MANAGER_CREATE')")
+    public ResponseEntity<?> registerCustomer(
+            @RequestBody @Valid CustomerRegistrationRequest request) {
+        customerService.addCustomer(request);
+        String token = jwtUtil.issueToken(request.email(), request.role().name());
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, token)
+                .build();
+    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ')")
@@ -32,24 +43,6 @@ public class CustomerController {
         return customerService.getCustomer(id);
     }
 
-    @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN_CREATE') or hasAuthority('MANAGER_CREATE')")
-    public ResponseEntity<?> registerCustomer(
-            @RequestBody @Valid CustomerRegistrationRequest request) {
-        customerService.addCustomer(request);
-        String token = jwtUtil.issueToken(request.email(), request.role().name());
-        return ResponseEntity.ok()
-                .header(HttpHeaders.AUTHORIZATION, token)
-                .build();
-    }
-
-    @DeleteMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN_DELETE') or hasAuthority('MANAGER_DELETE')")
-    public void deleteCustomer(
-            @PathVariable Long id) {
-        customerService.removeCustomerById(id);
-    }
-
     @PutMapping("{id}")
     @PreAuthorize("hasAuthority('ADMIN_UPDATE') or hasAuthority('MANAGER_UPDATE')")
     public void updateCustomer(
@@ -57,5 +50,12 @@ public class CustomerController {
             @RequestBody @Valid CustomerUpdateRequest updateRequest
     ) {
         customerService.updateCustomer(id, updateRequest);
+    }
+
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('ADMIN_DELETE') or hasAuthority('MANAGER_DELETE')")
+    public void deleteCustomer(
+            @PathVariable Long id) {
+        customerService.removeCustomerById(id);
     }
 }
