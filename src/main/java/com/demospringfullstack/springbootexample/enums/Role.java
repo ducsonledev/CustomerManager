@@ -16,22 +16,22 @@ public enum Role {
     USER(Collections.emptySet()),
     ADMIN(
             Set.of(
+                    ADMIN_CREATE,
                     ADMIN_READ,
                     ADMIN_UPDATE,
                     ADMIN_DELETE,
-                    ADMIN_CREATE,
+                    MANAGER_CREATE,
                     MANAGER_READ,
                     MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
+                    MANAGER_DELETE
             )
     ),
     MANAGER(
             Set.of(
+                    MANAGER_CREATE,
                     MANAGER_READ,
                     MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
+                    MANAGER_DELETE
             )
     )
 

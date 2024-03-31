@@ -25,6 +25,7 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
+    @PreAuthorize("hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ')")
     public CustomerDTO getCustomer(
             @PathVariable("id") Long id
     ) {
@@ -32,6 +33,7 @@ public class CustomerController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN_CREATE') or hasAuthority('MANAGER_CREATE')")
     public ResponseEntity<?> registerCustomer(
             @RequestBody @Valid CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
@@ -42,12 +44,14 @@ public class CustomerController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAuthority('ADMIN_DELETE') or hasAuthority('MANAGER_DELETE')")
     public void deleteCustomer(
             @PathVariable Long id) {
         customerService.removeCustomerById(id);
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasAuthority('ADMIN_UPDATE') or hasAuthority('MANAGER_UPDATE')")
     public void updateCustomer(
             @PathVariable Long id,
             @RequestBody @Valid CustomerUpdateRequest updateRequest

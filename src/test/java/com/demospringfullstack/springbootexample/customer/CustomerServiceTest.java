@@ -97,12 +97,12 @@ class CustomerServiceTest {
         when(customerDAO.existsPersonWithEmail(email)).thenReturn(false);
 
         var request = new CustomerRegistrationRequest(
-           "John",
-                email,
-                "password",
-                21,
-                Gender.MALE,
-                Role.USER
+            "John",
+            email,
+            "password",
+            21,
+            Gender.MALE,
+            Role.USER
         );
 
         String passwordHash = "hj4hjh4545;;kfg";
