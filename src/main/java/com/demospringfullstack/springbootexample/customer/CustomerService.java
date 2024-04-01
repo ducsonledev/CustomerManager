@@ -4,6 +4,7 @@ import com.demospringfullstack.springbootexample.enums.Role;
 import com.demospringfullstack.springbootexample.exception.custom.DuplicateResourceException;
 import com.demospringfullstack.springbootexample.exception.custom.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.custom.ResourceNotFoundException;
+import com.demospringfullstack.springbootexample.exception.message.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,7 +38,7 @@ public class CustomerService {
         return customerDAO.selectCustomerById(id)
                 .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(id)
+                        ErrorMessage.CUSTOMER_NOT_FOUND_EXCEPTION.formatted(id)
                 ));
     }
 
@@ -46,7 +47,7 @@ public class CustomerService {
         String email = customerRegistrationRequest.email();
         if (customerDAO.existsPersonWithEmail(email)) {
             throw new DuplicateResourceException(
-                    "email already exists"
+                    ErrorMessage.EMAIL_ALREADY_EXISTS_EXCEPTION
             );
         }
         customerDAO.insertCustomer(
@@ -64,7 +65,7 @@ public class CustomerService {
     public void removeCustomerById(Long id) {
         if(!customerDAO.existsPersonWithId(id))
             throw new ResourceNotFoundException(
-                    "customer with id [%s] not found".formatted(id)
+                    ErrorMessage.CUSTOMER_NOT_FOUND_EXCEPTION.formatted(id)
             );
         customerDAO.removeCustomerById(id);
     }
@@ -75,7 +76,7 @@ public class CustomerService {
     ) {
         Customer customer = customerDAO.selectCustomerById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(id)
+                        ErrorMessage.CUSTOMER_NOT_FOUND_EXCEPTION.formatted(id)
                 ));
 
         boolean changes = false;
@@ -91,12 +92,12 @@ public class CustomerService {
 
         if (updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())) {
             if (customerDAO.existsPersonWithEmail(updateRequest.email()))
-                throw new DuplicateResourceException("email already taken");
+                throw new DuplicateResourceException(ErrorMessage.EMAIL_ALREADY_EXISTS_EXCEPTION);
             customer.setEmail(updateRequest.email());
             changes = true;
         }
 
-        if (!changes) throw new RequestValidationException("No data changes found");
+        if (!changes) throw new RequestValidationException(ErrorMessage.NO_DATA_CHANGES_FOUND_EXCEPTION);
 
         customerDAO.updateCustomer(customer);
 

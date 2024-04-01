@@ -1,6 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
-import lombok.RequiredArgsConstructor;
+import com.demospringfullstack.springbootexample.exception.message.ErrorMessage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +18,6 @@ public class CustomerUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return customerDAO.selectUserByEmail(username).orElseThrow(() -> new UsernameNotFoundException(
-                "Username" + username +  " not found!"));
+                ErrorMessage.USERNAME_NOT_FOUND_EXCEPTION.formatted(username)));
     }
 }

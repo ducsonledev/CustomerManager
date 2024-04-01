@@ -17,7 +17,7 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
-    
+
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN_CREATE') or hasAuthority('MANAGER_CREATE')")
     public ResponseEntity<?> registerCustomer(
