@@ -55,8 +55,9 @@ public class CustomerIT {
         );
 
         // send a post request
+        String registerURI = CUSTOMER_URI + "/register";
         String jwtToken = webTestClient.post()
-                .uri(CUSTOMER_URI + "/register")// no localhost/ports in here, just to locate where in our api
+                .uri(registerURI)// no localhost/ports in here, just to locate where in our api
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
@@ -124,7 +125,7 @@ public class CustomerIT {
         String email = fakerName.lastName()
                 + UUID.randomUUID() + "@mailservice2323.com";
         int age = RANDOM.nextInt(1, 100);
-        Role role = Role.USER;
+        Role role = Role.ADMIN;
         var request = new CustomerRegistrationRequest(
                 name,
                 email,
@@ -135,30 +136,36 @@ public class CustomerIT {
         );
 
         // send a post request
-        webTestClient.post()
-                .uri(CUSTOMER_URI)// no localhost/ports in here, just to locate where in our api
+        String registerURI = CUSTOMER_URI + "/register";
+        String jwtToken = webTestClient.post()
+                .uri(registerURI)// no localhost/ports in here, just to locate where in our api
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
                 .exchange()// send the request
                 .expectStatus()
-                .isOk();
+                .isOk()
+                .returnResult(Void.class)
+                .getResponseHeaders()
+                .get(HttpHeaders.AUTHORIZATION)
+                .get(0);
 
         // get all customers
-        List<Customer> allCustomers = webTestClient.get()
+        List<CustomerDTO> allCustomers = webTestClient.get()
                 .uri(CUSTOMER_URI)
                 .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBodyList(new ParameterizedTypeReference<Customer>() {
+                .expectBodyList(new ParameterizedTypeReference<CustomerDTO>() {
                 })
                 .returnResult()
                 .getResponseBody();
 
         var id = allCustomers.stream()
-                .filter(customer -> customer.getEmail().equals(email))
-                .map(Customer::getId)
+                .filter(customer -> customer.email().equals(email))
+                .map(CustomerDTO::id)
                 .findFirst()
                 .orElseThrow();
 
@@ -166,14 +173,41 @@ public class CustomerIT {
         webTestClient.delete()
                 .uri(CUSTOMER_URI + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isOk();
+
+        // register a new customer for checking if customer before still exists or not
+        String newEmail = fakerName.lastName()
+                + UUID.randomUUID() + "@mailservice2323.com";
+        request = new CustomerRegistrationRequest(
+                name,
+                newEmail,
+                "password",
+                age,
+                gender,
+                role
+        );
+
+        jwtToken = webTestClient.post()
+                .uri(registerURI)// no localhost/ports in here, just to locate where in our api
+                .accept(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
+                .exchange()// send the request
+                .expectStatus()
+                .isOk()
+                .returnResult(Void.class)
+                .getResponseHeaders()
+                .get(HttpHeaders.AUTHORIZATION)
+                .get(0);
 
         // get customer by id
         webTestClient.get()
                 .uri(CUSTOMER_URI + "/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", jwtToken))
                 .exchange()
                 .expectStatus()
                 .isNotFound();
@@ -201,8 +235,9 @@ public class CustomerIT {
         );
 
         // send a post request
+        String registerURI = CUSTOMER_URI + "/register";
         webTestClient.post()
-                .uri(CUSTOMER_URI)// no localhost/ports in here, just to locate where in our api
+                .uri(registerURI)// no localhost/ports in here, just to locate where in our api
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
