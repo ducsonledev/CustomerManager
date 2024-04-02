@@ -1,5 +1,6 @@
 package com.demospringfullstack.springbootexample.customer;
 
+import com.demospringfullstack.springbootexample.enums.Role;
 import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,10 @@ public class CustomerController {
     public ResponseEntity<?> registerCustomer(
             @RequestBody @Valid CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
-        String token = jwtUtil.issueToken(request.email(), request.role().name());
+        String token = jwtUtil.issueToken(
+                request.email(),
+                request.role() != null ? request.role().name() : Role.USER.name()
+        );
         return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, token)
                 .build();

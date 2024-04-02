@@ -57,7 +57,7 @@ public class CustomerService {
                         passwordEncoder.encode(customerRegistrationRequest.password()),
                         customerRegistrationRequest.age(),
                         customerRegistrationRequest.gender(),
-                        customerRegistrationRequest != null ? customerRegistrationRequest.role() : Role.USER
+                        customerRegistrationRequest.role() != null ? customerRegistrationRequest.role() : Role.USER
                 )
         );
     }
