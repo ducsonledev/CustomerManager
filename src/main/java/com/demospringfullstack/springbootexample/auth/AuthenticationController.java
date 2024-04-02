@@ -1,5 +1,8 @@
 package com.demospringfullstack.springbootexample.auth;
 
+import com.demospringfullstack.springbootexample.customer.CustomerRegistrationRequest;
+import com.demospringfullstack.springbootexample.customer.CustomerService;
+import com.demospringfullstack.springbootexample.security.jwt.JWTUtil;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -14,7 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
-
+    private final CustomerService customerService;
+    private final JWTUtil jwtUtil;
     @PostMapping("/login")
     public ResponseEntity<?> loginCustomer(
             @RequestBody @Valid AuthenticationRequest request) {

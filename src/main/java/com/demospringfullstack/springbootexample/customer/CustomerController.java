@@ -13,13 +13,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/customers") // route path
-@PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
+//@PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
 public class CustomerController {
     private final CustomerService customerService;
     private final JWTUtil jwtUtil;
 
-    @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN_CREATE') or hasAuthority('MANAGER_CREATE')")
+    @PostMapping("register")
     public ResponseEntity<?> registerCustomer(
             @RequestBody @Valid CustomerRegistrationRequest request) {
         customerService.addCustomer(request);
@@ -30,13 +29,15 @@ public class CustomerController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ')")
+    @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
+            "and (hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ'))")
     public List<CustomerDTO> getCustomers() {
         return customerService.getAllCustomers();
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ')")
+    @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
+            "and (hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ'))")
     public CustomerDTO getCustomer(
             @PathVariable("id") Long id
     ) {
@@ -44,7 +45,8 @@ public class CustomerController {
     }
 
     @PutMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN_UPDATE') or hasAuthority('MANAGER_UPDATE')")
+    @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
+            "and (hasAuthority('ADMIN_UPDATE') or hasAuthority('MANAGER_UPDATE'))")
     public void updateCustomer(
             @PathVariable Long id,
             @RequestBody @Valid CustomerUpdateRequest updateRequest
@@ -53,7 +55,8 @@ public class CustomerController {
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasAuthority('ADMIN_DELETE') or hasAuthority('MANAGER_DELETE')")
+    @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
+            "and (hasAuthority('ADMIN_DELETE') or hasAuthority('MANAGER_DELETE'))")
     public void deleteCustomer(
             @PathVariable Long id) {
         customerService.removeCustomerById(id);

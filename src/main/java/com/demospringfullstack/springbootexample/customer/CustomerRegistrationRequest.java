@@ -17,6 +17,6 @@ public record CustomerRegistrationRequest(
                 Integer age,
                 @NotNull
                 Gender gender,
-                @Nullable
-                Role role
+                @NotNull
+                Role role // TODO default USER // issue @Nullable not working
 ) {}

@@ -56,11 +56,11 @@ public class CustomerIT {
 
         // send a post request
         String jwtToken = webTestClient.post()
-                .uri(CUSTOMER_URI)// no localhost/ports in here, just to locate where in our api
+                .uri(CUSTOMER_URI + "/register")// no localhost/ports in here, just to locate where in our api
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(request), CustomerRegistrationRequest.class) // attach request in test
-                .exchange()// send the request
+                .exchange() // send the request
                 .expectStatus()
                 .isOk()
                 .returnResult(Void.class)

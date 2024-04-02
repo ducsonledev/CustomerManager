@@ -30,8 +30,7 @@ import static com.demospringfullstack.springbootexample.enums.Role.*;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private static final String[] WHITE_LIST_URL = {"api/v1/customers", "/api/v1/auth/login"};
-    private static final String[] WHITE_LIST_URL2 = {"/api/v1/auth/login"};
+    private static final String[] WHITE_LIST_URL = {"api/v1/customers/register", "/api/v1/auth/login"};
     private final UserDetailsService userDetailsService;
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
@@ -64,9 +63,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers(//HttpMethod.POST,
-                                         WHITE_LIST_URL2
-                        )
+                        .requestMatchers(WHITE_LIST_URL)
                         .permitAll()
                         //.requestMatchers(HttpMethod.GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
                         //.requestMatchers("/api/v1/customers/**").hasAnyRole(ADMIN.name(), MANAGER.name())
