@@ -1,6 +1,5 @@
 package com.demospringfullstack.springbootexample.journey;
 
-import com.demospringfullstack.springbootexample.customer.Customer;
 import com.demospringfullstack.springbootexample.customer.CustomerDTO;
 import com.demospringfullstack.springbootexample.customer.CustomerRegistrationRequest;
 import com.demospringfullstack.springbootexample.customer.CustomerUpdateRequest;
