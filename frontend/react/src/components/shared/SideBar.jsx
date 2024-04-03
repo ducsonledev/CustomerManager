@@ -177,11 +177,14 @@ const MobileNav = ({ onOpen, ...rest }) => { // : MobileProps
                   spacing="1px"
                   ml="2">
                   <Text fontSize="sm">{customer?.username}</Text>
-                  {customer?.roles.map((role, id) => (  
+                  {/* {customer?.roles.map((role, id) => (  
                     <Text id={id} key={id} fontSize="xs" color="gray.600">
                       {role}
                     </Text>
-                  ))}
+                  ))} */}
+                  <Text fontSize="xs" color="gray.600">
+                      {customer?.roles.slice(-1)}
+                    </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
                   <FiChevronDown />
