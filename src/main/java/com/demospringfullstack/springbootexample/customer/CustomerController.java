@@ -48,6 +48,13 @@ public class CustomerController {
         return customerService.getCustomer(id);
     }
 
+    @GetMapping("/currentCustomer")
+    @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
+            "and (hasAuthority('ADMIN_READ') or hasAuthority('MANAGER_READ'))")
+    public CustomerDTO getCurrentCustomer() {
+        return customerService.getCurrentCustomer();
+    }
+
     @PutMapping("{id}")
     @PreAuthorize("(hasRole('ADMIN') or hasRole('MANAGER')) " +
             "and (hasAuthority('ADMIN_UPDATE') or hasAuthority('MANAGER_UPDATE'))")

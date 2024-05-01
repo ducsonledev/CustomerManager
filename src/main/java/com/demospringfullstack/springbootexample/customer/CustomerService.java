@@ -5,8 +5,10 @@ import com.demospringfullstack.springbootexample.exception.custom.DuplicateResou
 import com.demospringfullstack.springbootexample.exception.custom.RequestValidationException;
 import com.demospringfullstack.springbootexample.exception.custom.ResourceNotFoundException;
 import com.demospringfullstack.springbootexample.exception.message.ErrorMessage;
+import com.demospringfullstack.springbootexample.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -100,6 +102,21 @@ public class CustomerService {
         if (!changes) throw new RequestValidationException(ErrorMessage.NO_DATA_CHANGES_FOUND_EXCEPTION);
 
         customerDAO.updateCustomer(customer);
+    }
 
+    public CustomerDTO getCustomerByEmail(String email) {
+        return customerDAO.selectCustomerByEmail(email)
+                .map(customerDTOMapper)
+                .orElseThrow(
+                    () -> new ResourceNotFoundException(
+                            ErrorMessage.CUSTOMER_NOT_FOUND_EXCEPTION));
+    }
+
+    public CustomerDTO getCurrentCustomer() {
+        String email = SecurityUtil.getCurrentCustomerLogin()
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                ErrorMessage.PRINCIPAL_NOT_FOUND_EXCEPTION));
+        return getCustomerByEmail(email);
     }
 }

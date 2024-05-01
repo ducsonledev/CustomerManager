@@ -6,4 +6,5 @@ public class ErrorMessage {
     public final static String NO_DATA_CHANGES_FOUND_EXCEPTION = "No data changes found!";
     public final static String USERNAME_NOT_FOUND_EXCEPTION = "customer with username [%s] not found!";
 
+    public static final String PRINCIPAL_NOT_FOUND_EXCEPTION = "Customer not found.";
 }
