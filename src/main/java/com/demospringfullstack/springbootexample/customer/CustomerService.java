@@ -65,7 +65,7 @@ public class CustomerService {
     }
 
     public void removeCustomerById(Long id) {
-        if(!customerDAO.existsPersonWithId(id))
+        if (!customerDAO.existsPersonWithId(id))
             throw new ResourceNotFoundException(
                     ErrorMessage.CUSTOMER_NOT_FOUND_EXCEPTION.formatted(id)
             );
